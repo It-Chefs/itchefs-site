@@ -3,39 +3,44 @@ name: Sync Kitchen Exports
 on:
   workflow_dispatch:
   schedule:
-    - cron: "15 2 * * *"  # nightly 02:15 UTC
+    - cron: "15 2 * * *"   # nightly @ 02:15 UTC
+
+permissions:
+  contents: write          # allow commit back to this repo
 
 jobs:
   sync:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout site
+      - name: Checkout site repo
         uses: actions/checkout@v4
 
-      - name: Clone private Kitchen (read-only)
-        env:
-          TOKEN: ${{ secrets.KITCHEN_READ_TOKEN }}
+      - name: Configure git user
         run: |
-          git clone https://$TOKEN@github.com/IT-Chefs/chefs-reflex-kitchen.git kitchen
-          ls -la kitchen/export/site || true
+          git config user.name "itchefs-bot"
+          git config user.email "itchefs-bot@users.noreply.github.com"
 
-      - name: Copy exports into docs/kitchen
+      - name: Clone private Kitchen with PAT
         run: |
-          rm -rf docs/kitchen || true
+          rm -rf /tmp/kitchen
+          git clone --depth 1 \
+            https://x-access-token:${{ secrets.KITCHEN_READ_TOKEN }}@github.com/It-Chefs/chefs-reflex-kitchen.git \
+            /tmp/kitchen
+
+      # NOTE: exports currently live under chefs-reflex-kitchen-starter/export/site/...
+      - name: Sync exports into docs/kitchen
+        run: |
           mkdir -p docs/kitchen
-          if [ -d kitchen/export/site ]; then
-            cp -R kitchen/export/site/* docs/kitchen/
-          else
-            echo "No exports found yet."
-          fi
+          rsync -av --delete \
+            /tmp/kitchen/chefs-reflex-kitchen-starter/export/site/ \
+            docs/kitchen/
 
-      - name: Commit changes (if any)
+      - name: Commit & push if changed
         run: |
-          if [ -n "$(git status --porcelain)" ]; then
-            git config user.name "itchefs-bot"
-            git config user.email "itchefs@cyberhousesolutions.com"
-            git add -A
-            git commit -m "chore: sync kitchen exports"
+          if ! git diff --quiet; then
+            git add docs/kitchen
+            git commit -m "chore: sync kitchen exports $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
             git push
           else
             echo "No changes to commit."
