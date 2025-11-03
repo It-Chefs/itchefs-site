@@ -1,0 +1,10 @@
+theme: jekyll-theme-cayman
+title: IT Chefs Kitchen Docs
+description: Reflex playbooks, briefs, and exports cooked by Chef Avian & Sous-Chef Skunkah.
+show_downloads: false
+google_analytics: false
+
+# Optional custom color hints (for Cayman & future gold theme)
+header-bg-color: "#0a0a0a"
+header-text-color: "#c9a65b"
+accent-color: "#c9a65b"
