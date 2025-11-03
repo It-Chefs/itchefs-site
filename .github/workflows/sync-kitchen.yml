@@ -1,0 +1,42 @@
+name: Sync Kitchen Exports
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "15 2 * * *"  # nightly 02:15 UTC
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout site
+        uses: actions/checkout@v4
+
+      - name: Clone private Kitchen (read-only)
+        env:
+          TOKEN: ${{ secrets.KITCHEN_READ_TOKEN }}
+        run: |
+          git clone https://$TOKEN@github.com/IT-Chefs/chefs-reflex-kitchen.git kitchen
+          ls -la kitchen/export/site || true
+
+      - name: Copy exports into docs/kitchen
+        run: |
+          rm -rf docs/kitchen || true
+          mkdir -p docs/kitchen
+          if [ -d kitchen/export/site ]; then
+            cp -R kitchen/export/site/* docs/kitchen/
+          else
+            echo "No exports found yet."
+          fi
+
+      - name: Commit changes (if any)
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git config user.name "itchefs-bot"
+            git config user.email "itchefs@cyberhousesolutions.com"
+            git add -A
+            git commit -m "chore: sync kitchen exports"
+            git push
+          else
+            echo "No changes to commit."
+          fi

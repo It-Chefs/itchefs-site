@@ -1,0 +1,9 @@
+{
+  "name": "itchefs-site",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "start": "npx @docusaurus/init@latest start || echo 'Use your preferred static site generator if you like.'",
+    "build": "echo 'Add your SSG build command here (Docusaurus, Next.js, etc.)' && exit 0"
+  }
+}
