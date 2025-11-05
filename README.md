@@ -24,7 +24,8 @@ Unauthorized reproduction or redistribution of this repository’s concepts, cod
 ---
 
 © 2025 IT Chefs Studios — All Rights Reserved  
-🧠 Part of the **Agogy Gold™ Reflex Stack**  
-📜 Licensed under [All Rights Reserved License](LICENSE.md)  
-🧾 Proof of authorship: [Claim of Use](legal/Claim_of_Use.md)  
-✨ “Where Automation Meets Art.”
+Part of the **Agogy Gold™ Reflex Stack**  
+Licensed under [All Rights Reserved License](LICENSE.md)  
+Proof of Authorship: [Claim of Use](legal/Claim_of_Use.md)  
+*“Where Automation Meets Art.”*
+
