@@ -1,3 +1,8 @@
+---
+title: Agogy Gold Visual Template Spec
+---
+
+
 # Agogy Gold Visual Template Spec v1  
 *(IT Chefs Studios Design Standard)*
 
