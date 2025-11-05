@@ -1,21 +1,27 @@
 # ==========================================================
-# 🍳 IT Chefs Studios — GitHub Pages Configuration
-# Agogy Gold Visual Stack (Cayman Theme)
+# 🍳 IT Chefs Studios — GitHub Pages Configuration (Stable Build)
+# Version: Agogy Gold Base v1
 # ==========================================================
 
 # --- Site Basics ---
 title: "IT Chefs Studios"
 description: "Where Automation Meets Art™"
 url: "https://it-chefs.github.io"
-baseurl: "/itchefs-site"    # Do not remove; required for /docs builds
+baseurl: "/itchefs-site"    # Leave this as-is for GitHub Pages under /docs
 
-# --- Theme Settings ---
-# Use GitHub’s official Cayman theme
-plugins:
-  - jekyll-remote-theme
-remote_theme: pages-themes/cayman@v0.2.0
+# --- Theme ---
+# Use the built-in Cayman theme (does not require plugins)
+theme: jekyll-theme-cayman
 
-# --- Markdown & Build Settings ---
+# --- Directory Setup ---
+# Build the site from the /docs folder
+source: docs
+include:
+  - assets/css/custom.css
+  - assets/images
+  - _includes/head-custom.html
+
+# --- Markdown Engine ---
 markdown: kramdown
 highlighter: rouge
 encoding: "utf-8"
@@ -23,33 +29,21 @@ kramdown:
   input: GFM
   hard_wrap: false
 
-# --- Directory Setup ---
-# Your content lives inside /docs
-source: docs
-include:
-  - _includes
-  - assets/css/custom.css
-  - assets/images
-  - branding
-  - kitchen
-  - automation
-  - schemas
-  - tests
-
-# --- Exclude (safety: private & build files stay hidden) ---
+# --- Exclusions (keep sensitive or unused stuff out of builds) ---
 exclude:
   - "*.json"
-  - "*.yml"
   - "reflex/"
   - "workflows/"
   - "secrets/"
   - "README.md"
-  - "LICENSE"
   - "Gemfile"
   - "Gemfile.lock"
+  - "LICENSE"
+  - "package.json"
+  - "node_modules/"
+  - "itchefs-site-scaffold.zip"
 
-# --- Custom Agogy-Gold Styling ---
-# This auto-loads your color palette & layout tweaks
+# --- Defaults (layout & metadata for all pages) ---
 defaults:
   -
     scope:
@@ -57,8 +51,15 @@ defaults:
       type: "pages"
     values:
       layout: "default"
-      include_head: "/_includes/head-custom.html"
+      author: "Chef Avian & Sous-Chef Skunkah"
+      copyright: "© 2025 IT Chefs Studios™ — All rights reserved."
 
 # --- Footer Metadata ---
 author: "Chef Avian & Sous-Chef Skunkah"
 copyright: "© 2025 IT Chefs Studios™ — All rights reserved."
+
+# --- Notes ---
+# ✅ This version uses the safe built-in Cayman theme (green header).
+# ✅ Automatically applies to /docs content.
+# ✅ Compatible with GitHub Pages’ native builder (no plugin setup needed).
+# ✅ Once verified, we can layer Agogy Gold styling next via custom.css.
