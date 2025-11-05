@@ -12,10 +12,10 @@ Here you’ll find living recipes for ReflexRun AI, automation playbooks, and ch
 --- 
 
 ## 🧠 Core Dishes
-- 🧾 [Kitchen Briefs](kitchen/briefs/weekly-EXAMPLE.md) — weekly intelligence summaries  
-- ⚙️ [Automation Playbooks](automation/index.md) — scripted workflows  
-- 🧩 [Schemas & Pipelines](schemas/index.md) — data ingredients  
-- 🔬 [Tests & Validation](tests/index.md) — tasting menu for reflex quality  
+#- 🧾 [Kitchen Briefs](kitchen/briefs/weekly-EXAMPLE.md) — weekly intelligence summaries  
+#- ⚙️ [Automation Playbooks](automation/index.md) — scripted workflows  
+#- 🧩 [Schemas & Pipelines](schemas/index.md) — data ingredients  
+#- 🔬 [Tests & Validation](tests/index.md) — tasting menu for reflex quality  
 
 ---
 
