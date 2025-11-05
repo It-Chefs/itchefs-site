@@ -17,6 +17,11 @@ Here you’ll find living recipes for ReflexRun AI, automation playbooks, and ch
 - 🧩 [Schemas & Pipelines](../schemas/) — data ingredients  
 - 🔬 [Tests & Validation](../tests/) — tasting menu for reflex quality  
 
+### 🎨 Branding & Design Docs
+- [Brand Matrix 2025]({{ site.baseurl }}/branding/BrandMatrix_2025.html)
+- [Agogy Gold Visual Template Spec]({{ site.baseurl }}/branding/Agogy_Gold_Visual_Template_Spec.html)
+- [IP & Licensing Policy]({{ site.baseurl }}/branding/IP_and_Licensing_Policy.html)
+
 ---
 
 ## 🥇 Agogy Gold Edition
