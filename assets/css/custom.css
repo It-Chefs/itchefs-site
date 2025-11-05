@@ -1,13 +1,3 @@
-:root { --agogy-gold:#C9A65B; --charcoal:#1A1A1A; --warm-gray:#D3D3D3; }
-
-html, body {
-  background: var(--charcoal);
-  color: var(--warm-gray);
-  padding-top: 45px; /* adjust if banner height changes */
-}
-
-a, h1, h2, h3 { color: var(--agogy-gold); }
-
 /* --- Agogy Gold Banner Bar (Fixed) --- */
 .agogy-bar {
   position: fixed;
@@ -28,4 +18,18 @@ a, h1, h2, h3 { color: var(--agogy-gold); }
 
 .agogy-bar span {
   font-weight: 700;
+}
+
+/* --- Agogy Glow Subtitle (Option C) --- */
+.page-header h2 {
+  background: linear-gradient(90deg,#FFD77B,#C9A65B);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 6px rgba(0,0,0,.25);
+  animation: agogyGlow 6s ease-in-out infinite;
+}
+
+@keyframes agogyGlow {
+  0%,100% { filter: brightness(1); }
+  50% { filter: brightness(1.3); }
 }
