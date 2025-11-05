@@ -8,3 +8,5 @@ google_analytics: false
 header-bg-color: "#0a0a0a"
 header-text-color: "#c9a65b"
 accent-color: "#c9a65b"
+include:
+  - assets/css/custom.css
