@@ -20,3 +20,11 @@ Every build starts with clarity, craftsmanship, and respect for the human behind
 
 © 2025 IT Chefs Studios™ – All rights reserved.  
 Unauthorized reproduction or redistribution of this repository’s concepts, code, or design frameworks is prohibited.
+
+---
+
+© 2025 IT Chefs Studios — All Rights Reserved  
+🧠 Part of the **Agogy Gold™ Reflex Stack**  
+📜 Licensed under [All Rights Reserved License](LICENSE.md)  
+🧾 Proof of authorship: [Claim of Use](legal/Claim_of_Use.md)  
+✨ “Where Automation Meets Art.”
