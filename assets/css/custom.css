@@ -1,3 +1,0 @@
-:root { --agogy-gold:#C9A65B; --charcoal:#1A1A1A; --warm-gray:#D3D3D3; }
-body { background: var(--charcoal); color: var(--warm-gray); }
-a, h1, h2, h3 { color: var(--agogy-gold); }
