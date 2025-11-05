@@ -1,3 +1,8 @@
+---
+title: IP & Licensing Policy
+---
+
+
 # IT Chefs Studios — IP & Licensing Policy (2025)
 
 ## Purpose
