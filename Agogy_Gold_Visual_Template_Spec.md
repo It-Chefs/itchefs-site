@@ -37,3 +37,50 @@ Every piece should immediately signal **“Built by IT Chefs Studios™.”**
 ---
 
 ## 🪄 Standard Footer Text
+
+
+
+---
+
+## 🖼️ Logo Placement
+| Type | Position | Notes |
+|-------|-----------|-------|
+| **Primary Logo** | Bottom-right footer | Full-color Agogy Gold + White |
+| **Monochrome Logo** | Top-left watermark (opacity 70 %) | For subtle branding |
+| **Aspect Ratio** | 1:1 or Horizontal | Maintain clear space ≈ logo height × 0.5 |
+
+---
+
+## 📐 Canvas Sizes
+| Platform | Dimensions |
+|-----------|-------------|
+| Canva / Gamma Slides | 1200 × 600 px banner or 16:9 slides |
+| Notion Headers | 1500 × 500 px |
+| Print Poster | A4 (300 DPI) |
+
+---
+
+## 🧠 Consistency Notes
+- Keep background clean — no gradients beyond slight top-down vignette.  
+- Use gold dividers as the visual “thread” between sections.  
+- Never mix more than one accent color with Agogy Gold; white/gray only.  
+- All exported assets include footer line above.  
+
+---
+
+## ⚙️ File Naming Convention
+`<Brand>_<AssetType>_AgogyGold_v1.<ext>`  
+*Example:* `ITChefs_CoreProducts_AgogyGold_v1.png`
+
+---
+
+## 🪶 Version Control
+When templates evolve:  
+- Increment file name (`v2`, `v3`, etc.).  
+- Note changes in repo commit message:  
+  `design: update Agogy Gold Template to v2 (new font scale)`
+
+---
+
+© 2025 IT Chefs Studios™ – All rights reserved.  
+Unauthorized reproduction or alteration of these design specifications is prohibited.
