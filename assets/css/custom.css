@@ -29,6 +29,18 @@
   animation: agogyGlow 6s ease-in-out infinite;
 }
 
+
+/* --- Agogy Footer Signature --- */
+.site-footer { background: #0f0f0f; }
+.ag-footer {
+  display: flex; justify-content: center; align-items: center; gap: 12px;
+  padding: 16px 12px; color: #bbb; font: 500 14px/1.4 Inter, system-ui, sans-serif;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.ag-footer a { color: #d6d6d6; text-decoration: none; border-bottom: 1px solid transparent; }
+.ag-footer a:hover { border-color: currentColor; }
+.ag-footer strong { color: var(--agogy-gold); }
+
 @keyframes agogyGlow {
   0%,100% { filter: brightness(1); }
   50% { filter: brightness(1.3); }
