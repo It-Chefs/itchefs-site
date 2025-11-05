@@ -3,7 +3,6 @@ description: "Where Automation Meets Art™"
 url: "https://it-chefs.github.io"
 baseurl: "/itchefs-site"
 theme: jekyll-theme-cayman
-source: docs
 markdown: kramdown
 highlighter: rouge
 encoding: "utf-8"
