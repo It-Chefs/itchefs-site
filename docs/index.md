@@ -1,6 +1,6 @@
 ---
-layout: default
 title: IT Chefs Kitchen
+layout: default
 description: Reflex playbooks, briefs, and automation exports cooked by Chef Avian & Sous-Chef Skunkah.
 ---
 
@@ -9,21 +9,23 @@ description: Reflex playbooks, briefs, and automation exports cooked by Chef Avi
 Where **automation meets artistry**.  
 Here you’ll find living recipes for ReflexRun AI, automation playbooks, and chef-tested briefs straight from the kitchen.
 
---- 
+---
 
 ## 🧠 Core Dishes
-#- 🧾 [Kitchen Briefs](kitchen/briefs/weekly-EXAMPLE.md) — weekly intelligence summaries  
-#- ⚙️ [Automation Playbooks](automation/index.md) — scripted workflows  
-#- 🧩 [Schemas & Pipelines](schemas/index.md) — data ingredients  
-#- 🔬 [Tests & Validation](tests/index.md) — tasting menu for reflex quality  
+{% comment %}
+Uncomment these when their pages are ready.
+- 🧾 [Kitchen Briefs](kitchen/briefs/weekly-EXAMPLE.md) — weekly intelligence summaries  
+- ⚙️ [Automation Playbooks](automation/index.md) — scripted workflows  
+- 🧩 [Schemas & Pipelines](schemas/index.md) — data ingredients  
+- 🔬 [Tests & Validation](tests/index.md) — tasting menu for reflex quality  
+{% endcomment %}
 
 ---
 
-### 🎨 Branding & Design Docs
+## 🎨 Branding & Design Docs
 - [Brand Matrix 2025](branding/BrandMatrix_2025.md)
 - [Agogy Gold Visual Template Spec](branding/Agogy_Gold_Visual_Template_Spec.md)
 - [IP & Licensing Policy](branding/IP_and_Licensing_Policy.md)
-
 
 ---
 
@@ -37,4 +39,3 @@ a curated ecosystem for builders, chefs, and architects who cook with code.
 
 **Repo:** [itchefs-site](https://github.com/It-Chefs/itchefs-site)  
 **Kitchen Sync Logs:** [chefs-reflex-kitchen → Site Exports](https://github.com/It-Chefs/itchefs-site/actions)
-
