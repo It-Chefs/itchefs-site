@@ -1,6 +1,6 @@
-theme: jekyll-theme-cayman
-title: IT Chefs Kitchen Docs
-description: Reflex playbooks, briefs, and exports cooked by Chef Avian & Sous-Chef Skunkah.
+theme: minima
+title: "IT Chefs Studios"
+description: "Where Automation Meets Art™"
 show_downloads: false
 google_analytics: false
 
