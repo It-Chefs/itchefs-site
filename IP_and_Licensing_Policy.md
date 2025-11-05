@@ -20,6 +20,12 @@ Unless otherwise noted:
 Whenever a public build or collaboration references IT Chefs, include the following credit line:
 > *Built by IT Chefs Studios — Where Automation Meets Art™*
 
+| Brand | Purpose | Status |
+|--------|----------|--------|
+| NeuroPilot | ADHD & focus tools | 🧩 In Development |
+| Phoenix Nest | Family healing & income systems | 🔮 Planned |
+
+
 ## Contact
 For licensing inquiries or partnership requests, contact:  
 📧 **houseman313@gmail.com**
