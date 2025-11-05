@@ -1,4 +1,21 @@
 <div class="agogy-bar">
   🍳 Chef Avian & Skunkah Kitchen · <em>Agogy Gold Edition 2025</em>
 </div>
+
 <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
+
+<!-- Agogy Footer Injector -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var f = document.querySelector('.site-footer');
+  if (!f) return;
+
+  f.innerHTML = `
+    <div class="ag-footer">
+      <span>© ${new Date().getFullYear()} IT Chefs Studios — <strong>Agogy Gold Edition</strong></span>
+      · <a href="https://github.com/It-Chefs/itchefs-site">GitHub</a>
+      · <a href="https://github.com/It-Chefs/itchefs-site/blob/main/LICENSE">License</a>
+    </div>
+  `;
+});
+</script>
