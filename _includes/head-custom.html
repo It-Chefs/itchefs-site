@@ -135,3 +135,35 @@ document.addEventListener('DOMContentLoaded', function () {
   applyMode(initial);
 });
 </script>
+
+<!-- IT Chefs Hero Logo Injector -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var header = document.querySelector('.page-header');
+  if (!header) return;
+
+  // Where to put it (just under the big title if present, else top of header)
+  var titleEl = header.querySelector('.project-name') || header;
+
+  // Avoid duplicates
+  if (header.querySelector('.ag-logo')) return;
+
+  // Resolve the logo path with baseurl correctly (Jekyll will render this)
+  var logoSrc = "{{ '/assets/img/itchefs-mark.png' | relative_url }}";
+
+  var img = document.createElement('img');
+  img.className = 'ag-logo';
+  img.src = logoSrc;
+  img.alt = 'IT Chefs Logo';
+  img.decoding = 'async';
+  img.loading = 'eager';   // keeps it crisp in the hero
+
+  // Insert right after the title
+  if (titleEl && titleEl.parentNode) {
+    titleEl.insertAdjacentElement('afterend', img);
+  } else {
+    header.insertAdjacentElement('afterbegin', img);
+  }
+});
+</script>
+
