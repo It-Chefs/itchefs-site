@@ -266,3 +266,42 @@ body { padding-top: 45px; }
   0%, 100% { transform: rotate(0deg) scale(1); opacity: 0.94; }
   50% { transform: rotate(8deg) scale(1.07); opacity: 1; }
 }
+
+/* === IT Chefs Hero Logo (Scaled + Centered) === */
+.ag-logo {
+  display: block;
+  margin: 0.75rem auto; /* center horizontally */
+  width: clamp(84px, 10vw, 140px); /* responsive size */
+  height: auto;
+  filter:
+    drop-shadow(0 0 4px #d6b877)
+    drop-shadow(0 0 10px #b6923e);
+  animation:
+    agLogoGlow 3s ease-in-out infinite alternate,
+    agLogoFloat 8s ease-in-out infinite;
+  opacity: 0;
+  transform: translateY(6px) scale(0.98);
+  animation-delay: 120ms; /* staggers with other hero anims if any */
+  animation-fill-mode: forwards;
+}
+
+@keyframes agLogoGlow {
+  0%   { filter: drop-shadow(0 0 5px #d6b877) drop-shadow(0 0 10px #b6923e); transform: translateY(6px) scale(0.98); opacity: 0.0; }
+  50%  { filter: drop-shadow(0 0 18px #ffd983) drop-shadow(0 0 28px #e6c879); transform: translateY(0)    scale(1.02); opacity: 0.95; }
+  100% { filter: drop-shadow(0 0 6px #d6b877)  drop-shadow(0 0 12px #b6923e); transform: translateY(2px)  scale(1.00); opacity: 1; }
+}
+
+@keyframes agLogoFloat {
+  0%,100% { transform: translateY(0) }
+  50%     { transform: translateY(-5px) }
+}
+
+/* Optional: subtle hover pop */
+.ag-logo:hover {
+  transform: translateY(-2px) scale(1.06);
+  filter:
+    drop-shadow(0 0 20px #f5d878)
+    drop-shadow(0 0 30px #e6c879);
+  transition: transform .25s ease, filter .25s ease;
+}
+
