@@ -102,8 +102,9 @@ document.addEventListener('DOMContentLoaded', function () {
     toggle.setAttribute('aria-label','Toggle Showtime animations');
     toggle.innerHTML = '<span class="dot" aria-hidden="true"></span><span class="label">Showtime</span>';
     toggleLabel = toggle.querySelector('.label');
-    bar.style.position = 'relative';
+   // bar.style.position = 'relative'; // ← delete or comment out
     bar.appendChild(toggle);
+
 
     toggle.addEventListener('click', function(){
       var current = document.documentElement.getAttribute('data-motion') || 'hype';
