@@ -6,10 +6,7 @@
 <!-- 🍯 Load Agogy Styles -->
 <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
 
-<!-- (Optional) Twemoji for crisp, consistent emoji rendering -->
-<script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
-
-<!-- ⚙️ Agogy Reflex Injectors (footer, docs-nav, motion, brand, showtime) -->
+<!-- ⚙️ Agogy Injectors (footer, docs-nav, motion, brand, showtime + hero logo) -->
 <script>
 document.addEventListener('DOMContentLoaded', function () {
   /* === Footer Injector === */
@@ -58,31 +55,23 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  /* === Motion Suite: shimmer + ambient + breathe + CTA pulse === */
+  /* === Motion Suite: ambient + shimmer + breathe + CTA pulse === */
   var hero = document.querySelector('.page-header');
   if (hero) {
     hero.classList.add('ag-ambient');
     var name = hero.querySelector('.project-name');
     var tag  = hero.querySelector('.project-tagline');
 
-    /* === Brand Name Override → IT🍽️Chefs™ (full-color utensil) === */
-    var brandHTML = 'IT<span class="knife" role="img" aria-label="plate with fork and knife">🍽️</span>Chefs<span class="tm">™</span>';
+    /* === Brand Name Override → IT Chefs™ (no emoji) === */
+    var brandHTML = 'IT&nbsp;Chefs<span class="tm">™</span>';
     if (name) {
       name.innerHTML = brandHTML;
       name.classList.add('ag-shimmer');
     }
     if (tag) tag.classList.add('ag-shimmer');
 
-    // Also set browser tab title for consistency
-    try { document.title = 'IT-Chefs — Where Automation Meets Art™'; } catch(e){}
-
-    // Twemoji parse JUST the utensil (optional consistency)
-    try {
-      if (window.twemoji) {
-        var utensil = name && name.querySelector('.knife');
-        if (utensil) twemoji.parse(utensil, { folder: 'svg', ext: '.svg' });
-      }
-    } catch(e){}
+    // tab title
+    try { document.title = 'IT Chefs — Where Automation Meets Art™'; } catch(e){}
   }
 
   // Banner gentle breathe
@@ -121,9 +110,8 @@ document.addEventListener('DOMContentLoaded', function () {
     toggle.setAttribute('aria-label','Toggle Showtime animations');
     toggle.innerHTML = '<span class="dot" aria-hidden="true"></span><span class="label">Showtime</span>';
     toggleLabel = toggle.querySelector('.label');
-    bar.style.position = 'fixed'; /* keep bar fixed */
+    bar.style.position = 'fixed';
     bar.appendChild(toggle);
-
     toggle.addEventListener('click', function(){
       var current = document.documentElement.getAttribute('data-motion') || 'hype';
       var next = current === 'hype' ? 'calm' : 'hype';
@@ -133,37 +121,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
   if (prefersReduce) initial = 'calm';
   applyMode(initial);
-});
-</script>
 
-<!-- IT Chefs Hero Logo Injector -->
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  var header = document.querySelector('.page-header');
-  if (!header) return;
-
-  // Where to put it (just under the big title if present, else top of header)
-  var titleEl = header.querySelector('.project-name') || header;
-
-  // Avoid duplicates
-  if (header.querySelector('.ag-logo')) return;
-
-  // Resolve the logo path with baseurl correctly (Jekyll will render this)
-  var logoSrc = "{{ '/assets/img/itchefs-mark.png' | relative_url }}";
-
-  var img = document.createElement('img');
-  img.className = 'ag-logo';
-  img.src = logoSrc;
-  img.alt = 'IT Chefs Logo';
-  img.decoding = 'async';
-  img.loading = 'eager';   // keeps it crisp in the hero
-
-  // Insert right after the title
-  if (titleEl && titleEl.parentNode) {
-    titleEl.insertAdjacentElement('afterend', img);
-  } else {
-    header.insertAdjacentElement('afterbegin', img);
+  /* === IT Chefs Hero Logo (PNG under title) === */
+  if (hero) {
+    var titleEl = hero.querySelector('.project-name') || hero;
+    if (!hero.querySelector('.ag-logo')) {
+      var logoSrc = "{{ '/assets/img/itchefs-mark.png' | relative_url }}";
+      var img = document.createElement('img');
+      img.className = 'ag-logo';
+      img.src = logoSrc;
+      img.alt = 'IT Chefs Logo';
+      img.decoding = 'async';
+      img.loading = 'eager';
+      titleEl.insertAdjacentElement('afterend', img);
+    }
   }
 });
 </script>
-
