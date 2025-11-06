@@ -1,165 +1,113 @@
-/* ===== Agogy Gold – Cayman Overlay (Consolidated) ===== */
-
-/* Brand tokens (safe to re-declare) */
-:root{
-  --agogy-gold:#C9A65B;
-  --charcoal:#121212;
-  --warm-gray:#D3D3D3;
+/* =========================
+   Agogy Gold – Global Base
+   ========================= */
+:root {
+  --agogy-gold: #C9A65B;
+  --charcoal: #1A1A1A;
+  --warm-gray: #D3D3D3;
 }
 
-/* Base + offset for fixed banner */
-html, body{
+html, body {
   background: var(--charcoal);
   color: var(--warm-gray);
-  padding-top: 45px; /* offset equals fixed banner height */
 }
 
-/* ---------------------------------------
-   Fixed Agogy Gold Banner Bar
---------------------------------------- */
-.agogy-bar{
-  position: fixed; top:0; left:0; width:100%; z-index:999;
-  background: linear-gradient(90deg,#C9A65B,#D8B978 40%,#C9A65B);
-  color:#111;
-  font-family:Poppins,Inter,sans-serif;
-  font-weight:600; text-align:center;
-  padding:10px 0; letter-spacing:.4px;
-  border-bottom:1px solid rgba(255,255,255,.15);
-  box-shadow:0 2px 10px rgba(0,0,0,.25);
-}
-.agogy-bar span{ font-weight:700; }
+/* Subtle default brand accents */
+a, h1, h2, h3 { color: var(--agogy-gold); }
 
-/* ---------------------------------------
-   Docs-aware Sticky Top Navigation
---------------------------------------- */
+/* =========================
+   Fixed Gold Banner (top)
+   ========================= */
+.agogy-bar {
+  position: fixed;
+  top: 0; left: 0; width: 100%;
+  z-index: 999;
+  background: linear-gradient(90deg, #C9A65B, #D8B978 40%, #C9A65B);
+  color: #111;
+  font-family: Poppins, Inter, system-ui, sans-serif;
+  font-weight: 600;
+  text-align: center;
+  padding: 10px 0;
+  letter-spacing: .4px;
+  border-bottom: 1px solid rgba(0,0,0,.25); /* precision edge */
+  box-shadow: 0 2px 10px rgba(0,0,0,.25);
+}
+
+/* Breathing brightness (super subtle) */
+.agogy-bar.ag-breathe { animation: agBreathe 9s ease-in-out infinite; }
+@keyframes agBreathe { 0%,100% { filter: brightness(1) } 50% { filter: brightness(1.06) } }
+
+/* Keep content clear of the fixed banner */
+body { padding-top: 45px; }
+
+/* =========================
+   Docs-Friendly Top Nav
+   ========================= */
 .ag-nav{
   position: sticky;
-  top: 45px; /* sits under the fixed banner */
+  top: 45px; /* sits right under the gold bar */
   z-index: 998;
-  display:flex; gap:16px; justify-content:center; align-items:center;
-  padding:10px 16px;
-  background: rgba(15,15,15,.92);
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 16px;
+  background: rgba(15,15,15,0.92);
   backdrop-filter: blur(6px);
-  border-bottom:1px solid rgba(255,255,255,.08);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 .ag-nav a{
-  color:#d8d8d8; text-decoration:none;
-  padding:6px 12px; border-radius:10px;
-  border:1px solid transparent;
+  color: #d8d8d8;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 10px;
+  border: 1px solid transparent;
   transition: filter .2s ease, border-color .2s ease, background .2s ease;
   white-space: nowrap;
 }
-.ag-nav a:hover{
-  color:#fff; border-color: rgba(201,166,91,.5);
-}
+.ag-nav a:hover{ color: #fff; border-color: rgba(201,166,91,0.5); }
 .ag-nav a.active{
-  color:#111;
+  color: #111;
   background: linear-gradient(90deg,#C9A65B,#D8B978 60%,#C9A65B);
   border-color: transparent;
-  font-weight:600;
-  box-shadow:0 2px 10px rgba(0,0,0,.25);
+  font-weight: 600;
+  box-shadow: 0 2px 10px rgba(0,0,0,.25);
 }
-@media (max-width:520px){
-  .ag-nav{ overflow-x:auto; justify-content:flex-start; }
-}
-
-/* ---------------------------------------
-   Dark Studio Mode for content
---------------------------------------- */
-.main-content{
-  background:#121212;
-  color:var(--warm-gray);
-  border-top:1px solid rgba(255,255,255,.08);
-  padding:40px 24px;
+@media (max-width: 520px){
+  .ag-nav{ overflow-x: auto; justify-content: flex-start; }
 }
 
-/* Cayman footer harmonize */
-.site-footer{
-  background:#0f0f0f; color:#bbb;
-  border-top:1px solid rgba(255,255,255,.08);
+/* =========================
+   Content & Footer Polish
+   ========================= */
+.main-content {
+  background: #121212;
+  color: var(--warm-gray);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 40px 24px;
 }
 
-/* Footer signature */
-.ag-footer{
-  display:flex; justify-content:center; align-items:center; gap:12px;
-  padding:16px 12px; color:#bbb;
-  font:500 14px/1.4 Inter,system-ui,sans-serif;
-  border-top:1px solid rgba(255,255,255,.08);
+.site-footer { background: #0f0f0f; color: #bbb; border-top: 1px solid rgba(255,255,255,0.08); }
+.ag-footer {
+  display: flex; justify-content: center; align-items: center; gap: 12px;
+  padding: 16px 12px; font: 500 14px/1.4 Inter, system-ui, sans-serif;
 }
-.ag-footer a{
-  color:#d6d6d6; text-decoration:none; border-bottom:1px solid transparent;
-}
-.ag-footer a:hover{ border-color:currentColor; }
-.ag-footer strong{ color:var(--agogy-gold); }
+.ag-footer a { color: #d6d6d6; text-decoration: none; border-bottom: 1px solid transparent; }
+.ag-footer a:hover { border-color: currentColor; }
+.ag-footer strong { color: var(--agogy-gold); }
 
-/* ---------------------------------------
-   Hero polish + contrast overlay
---------------------------------------- */
-.page-header{ position:relative; }
-.page-header::after{
-  content:""; position:absolute; inset:0;
-  background: linear-gradient(180deg, rgba(0,0,0,.12), rgba(0,0,0,.18));
-  pointer-events:none;
-}
-.page-header .project-name{
-  color:var(--agogy-gold) !important;
-  text-shadow:0 2px 8px rgba(0,0,0,.25);
-}
-.page-header .project-tagline{
-  margin-top:.25rem;
-  text-shadow:0 2px 6px rgba(0,0,0,.35);
-}
+/* =========================
+   Hero / Project Title
+   ========================= */
+.page-header { position: relative; }
 
-/* Stronger Gold Glow for subtitle/tagline */
-.page-header h2,
-.page-header .project-tagline{
-  background: linear-gradient(90deg,#FFD77B,#C9A65B);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: agogyGlow 6s ease-in-out infinite;
-}
-@keyframes agogyGlow{
-  0%,100%{ filter:brightness(1); }
-  50%    { filter:brightness(1.45); }
-}
-
-/* ---------------------------------------
-   Gold CTA button
---------------------------------------- */
-.btn{
-  background:#C9A65B !important;
-  border-color:rgba(0,0,0,.15) !important;
-  color:#111 !important;
-  box-shadow:0 2px 10px rgba(0,0,0,.25);
-}
-.btn:focus, .btn:hover{
-  filter:brightness(1.08);
-  box-shadow:0 4px 16px rgba(0,0,0,.35);
-}
-
-/* tiny separator for precision polish */
-.agogy-bar {
-  border-bottom: 1px solid rgba(0,0,0,.25); /* subtle steel edge */
-}
-
-/* ===== Agogy Motion Suite – Hypnotic but Tasteful ===== */
-/* Motion-safe: respect users who prefer reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .ag-shimmer, .ag-ambient, .btn.ag-pulse, .agogy-bar.ag-breathe { 
-    animation: none !important;
-    transition: none !important;
-  }
-}
-
-/* 1) Gold Shimmer sweep across project name + tagline */
+/* Gold project name & tagline with animated shimmer (when .ag-shimmer is added) */
 .page-header .project-name,
 .page-header .project-tagline {
-  position: relative;
-  /* keep your existing gold text gradient, then layer a shimmer */
+  text-shadow: 0 2px 8px rgba(0,0,0,.25);
 }
 .page-header .project-name.ag-shimmer,
 .page-header .project-tagline.ag-shimmer {
-  /* animated gold foil sweep */
   background-image:
     linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.35) 12%, rgba(255,255,255,0) 24%),
     linear-gradient(90deg, #FFD77B, #C9A65B);
@@ -168,49 +116,70 @@ html, body{
   background-position: -120% 0, 0 0;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: agShimmer 6.5s ease-in-out infinite;
+  animation: agTextShimmer 6.5s ease-in-out infinite;
 }
-@keyframes agShimmer {
+@keyframes agTextShimmer {
   0%   { background-position: -120% 0, 0 0; filter: drop-shadow(0 2px 6px rgba(0,0,0,.25)); }
   46%  { background-position: 120% 0, 0 0;  filter: drop-shadow(0 2px 8px rgba(0,0,0,.35)); }
   100% { background-position: 120% 0, 0 0;  filter: drop-shadow(0 2px 6px rgba(0,0,0,.25)); }
 }
 
-/* 2) Ambient aurora glow drifting behind the hero */
-.page-header.ag-ambient { 
-  overflow: hidden; 
-}
-.page-header.ag-ambient::before {
-  content: "";
-  position: absolute; inset: -20%;
-  background:
-    radial-gradient(60% 40% at 20% 30%, rgba(201,166,91,.18), transparent 60%),
-    radial-gradient(55% 45% at 80% 70%, rgba(255,215,123,.12), transparent 60%),
-    radial-gradient(40% 30% at 50% 50%, rgba(0,0,0,.15), transparent 70%);
-  filter: blur(20px);
-  animation: agAurora 18s ease-in-out infinite alternate;
-  pointer-events: none;
-}
-@keyframes agAurora {
-  0%   { transform: translate3d(-2%, -1%, 0) scale(1.02); opacity: .85; }
-  50%  { transform: translate3d(2%, 1%, 0) scale(1.06);  opacity: 1; }
-  100% { transform: translate3d(-1%, 2%, 0) scale(1.04); opacity: .9; }
-}
-
-/* 3) Banner “breathing” brightness—super subtle */
-.agogy-bar.ag-breathe {
-  animation: agBreathe 9s ease-in-out infinite;
-}
-@keyframes agBreathe {
-  0%,100% { filter: brightness(1); }
-  50%     { filter: brightness(1.06); } /* keep it subtle for premium feel */
-}
-
-/* 4) CTA gold pulse ring */
-.btn.ag-pulse {
+/* =========================
+   Royal Chameleon Hero Flow
+   (liquid gradient + purple shimmer)
+   ========================= */
+.ag-ambient {
   position: relative;
-  isolation: isolate;
+  overflow: hidden;
+  background: linear-gradient(
+    120deg,
+    #04619f,   /* deep blue */
+    #06beb6,   /* teal */
+    #6236ff,   /* royal purple */
+    #C9A65B,   /* agogy gold */
+    #04619f
+  );
+  background-size: 500% 500%;
+  animation: agChameleon 18s ease-in-out infinite;
 }
+@keyframes agChameleon {
+  0%   { background-position: 0% 50%; }
+  25%  { background-position: 50% 100%; }
+  50%  { background-position: 100% 50%; }
+  75%  { background-position: 50% 0%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Floating shimmer overlay for depth */
+.ag-ambient::before {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 30% 40%, rgba(255,255,255,0.07), transparent 65%),
+    radial-gradient(circle at 70% 60%, rgba(98,54,255,0.15), transparent 70%);
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  animation: agAuroraShimmer 10s ease-in-out infinite alternate;
+}
+@keyframes agAuroraShimmer {
+  0%   { transform: translate(0,0) scale(1);   opacity: .7; }
+  50%  { transform: translate(-6%, 5%) scale(1.05); opacity: 1; }
+  100% { transform: translate(8%, -5%) scale(1);    opacity: .8; }
+}
+
+/* =========================
+   CTA: Gold Button + Pulse
+   ========================= */
+.btn {
+  background: #C9A65B !important;
+  border-color: rgba(0,0,0,.15) !important;
+  color: #111 !important;
+  box-shadow: 0 2px 10px rgba(0,0,0,.25);
+}
+.btn:focus,
+.btn:hover { filter: brightness(1.08); box-shadow: 0 4px 16px rgba(0,0,0,.35); }
+
+.btn.ag-pulse { position: relative; isolation: isolate; }
 .btn.ag-pulse::after {
   content:"";
   position:absolute; inset:-6px;
@@ -225,7 +194,9 @@ html, body{
   100% { opacity:0;   box-shadow: 0 0 0 22px rgba(201,166,91,0); }
 }
 
-/* === Showtime Toggle UI === */
+/* =========================
+   Showtime Toggle (Calm ⇄ Hype)
+   ========================= */
 .ag-toggle {
   position: absolute; right: 10px; top: 6px;
   display: inline-flex; align-items: center; gap: 8px;
@@ -251,47 +222,10 @@ html, body{
   transition: none !important;
 }
 
-/* If the user prefers reduced motion, force Calm visuals */
+/* Respect prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .ag-shimmer, .ag-ambient::before, .btn.ag-pulse, .agogy-bar.ag-breathe {
+  .ag-shimmer, .ag-ambient, .ag-ambient::before, .btn.ag-pulse, .agogy-bar.ag-breathe {
     animation: none !important; transition: none !important;
   }
 }
-
-/* --- Agogy Liquid Aurora Gradient --- */
-.ag-ambient {
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(135deg, #04619f, #06beb6);
-  animation: agLiquid 20s ease-in-out infinite alternate;
-  background-size: 400% 400%;
-}
-
-@keyframes agLiquid {
-  0%   { background-position: 0% 50%; background-color: #04619f; }
-  25%  { background-position: 50% 100%; background-color: #028a81; }
-  50%  { background-position: 100% 50%; background-color: #067f7f; }
-  75%  { background-position: 50% 0%; background-color: #0b6cb1; }
-  100% { background-position: 0% 50%; background-color: #04619f; }
-}
-
-/* optional: add soft overlay for extra depth */
-.ag-ambient::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.06), transparent 60%),
-              radial-gradient(circle at 70% 70%, rgba(0,0,0,0.15), transparent 70%);
-  mix-blend-mode: overlay;
-  pointer-events: none;
-  animation: agAurora 18s ease-in-out infinite alternate;
-}
-
-@keyframes agAurora {
-  0%   { transform: translate(0,0) scale(1); }
-  50%  { transform: translate(-10%, 5%) scale(1.1); }
-  100% { transform: translate(10%, -5%) scale(1); }
-}
-
-
