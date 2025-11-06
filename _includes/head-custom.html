@@ -6,7 +6,7 @@
 <!-- 🍯 Load Agogy Styles -->
 <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
 
-<!-- ⚙️ Agogy Reflex Injectors -->
+<!-- ⚙️ Agogy Reflex Injectors (footer, nav, motion, showtime) -->
 <script>
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -38,13 +38,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var nav = document.createElement('nav');
     nav.className = 'ag-nav';
+    nav.setAttribute('aria-label','Primary');
     nav.innerHTML = links.map(function (i) {
       return '<a href="' + i.href + '">' + i.label + '</a>';
     }).join('');
 
+    // Insert nav just before the hero
     header.insertAdjacentElement('beforebegin', nav);
 
-    // Highlight active page
+    // Active link highlight
     var here = location.pathname;
     Array.from(nav.querySelectorAll('a')).forEach(function(a){
       try {
@@ -56,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  /* === Motion Suite: Shimmer + Ambient + Pulse === */
+  /* === Motion Suite: shimmer + ambient + breathe + CTA pulse === */
   var hero = document.querySelector('.page-header');
   if (hero) {
     hero.classList.add('ag-ambient');
@@ -66,13 +68,51 @@ document.addEventListener('DOMContentLoaded', function () {
     if (tag)  tag.classList.add('ag-shimmer');
   }
 
-  // Banner “breathe” animation
   var bar = document.querySelector('.agogy-bar');
   if (bar) bar.classList.add('ag-breathe');
 
-  // CTA pulse
   var cta = document.querySelector('.btn');
   if (cta) cta.classList.add('ag-pulse');
 
+  /* === Showtime Toggle (Calm ⇄ Hype) === */
+  function getQueryMode() {
+    var m = new URLSearchParams(location.search).get('mode');
+    return m && (m === 'hype' || m === 'calm') ? m : null;
+  }
+  var prefersReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var saved = localStorage.getItem('agogy.motion');
+  var qmode = getQueryMode();
+  var initial = prefersReduce ? 'calm' : (qmode || saved || 'hype');
+
+  function applyMode(mode){
+    document.documentElement.setAttribute('data-motion', mode);
+    if (toggle) {
+      toggle.classList.toggle('on', mode === 'hype');
+      toggleLabel.textContent = 'Showtime: ' + (mode === 'hype' ? 'ON' : 'OFF');
+    }
+    localStorage.setItem('agogy.motion', mode);
+  }
+
+  // Create the pill toggle in the gold bar (top-right)
+  var toggle = null, toggleLabel = null;
+  if (bar) {
+    toggle = document.createElement('button');
+    toggle.className = 'ag-toggle';
+    toggle.setAttribute('type','button');
+    toggle.setAttribute('aria-label','Toggle Showtime animations');
+    toggle.innerHTML = '<span class="dot" aria-hidden="true"></span><span class="label">Showtime</span>';
+    toggleLabel = toggle.querySelector('.label');
+    bar.style.position = 'relative';
+    bar.appendChild(toggle);
+
+    toggle.addEventListener('click', function(){
+      var current = document.documentElement.getAttribute('data-motion') || 'hype';
+      var next = current === 'hype' ? 'calm' : 'hype';
+      applyMode(next);
+    });
+  }
+
+  if (prefersReduce) initial = 'calm';
+  applyMode(initial);
 });
 </script>
