@@ -6,6 +6,9 @@
 <!-- 🍯 Load Agogy Styles -->
 <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
 
+<!-- (Optional) Twemoji for crisp, consistent emoji rendering -->
+<script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
+
 <!-- ⚙️ Agogy Reflex Injectors (footer, docs-nav, motion, brand, showtime) -->
 <script>
 document.addEventListener('DOMContentLoaded', function () {
@@ -62,8 +65,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var name = hero.querySelector('.project-name');
     var tag  = hero.querySelector('.project-tagline');
 
-    /* === Brand Name Override → IT🗡️Chefs™ === */
-    var brandHTML = 'IT<span class="knife">🗡️</span>Chefs<span class="tm">™</span>';
+    /* === Brand Name Override → IT🍽️Chefs™ (full-color utensil) === */
+    var brandHTML = 'IT<span class="knife" role="img" aria-label="plate with fork and knife">🍽️</span>Chefs<span class="tm">™</span>';
     if (name) {
       name.innerHTML = brandHTML;
       name.classList.add('ag-shimmer');
@@ -72,9 +75,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Also set browser tab title for consistency
     try { document.title = 'IT-Chefs — Where Automation Meets Art™'; } catch(e){}
+
+    // Twemoji parse JUST the utensil (optional consistency)
+    try {
+      if (window.twemoji) {
+        var utensil = name && name.querySelector('.knife');
+        if (utensil) twemoji.parse(utensil, { folder: 'svg', ext: '.svg' });
+      }
+    } catch(e){}
   }
 
-  // Banner breathe
+  // Banner gentle breathe
   var bar = document.querySelector('.agogy-bar');
   if (bar) bar.classList.add('ag-breathe');
 
