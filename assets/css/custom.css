@@ -12,7 +12,6 @@ html, body {
   color: var(--warm-gray);
 }
 
-/* Subtle default brand accents */
 a, h1, h2, h3 { color: var(--agogy-gold); }
 
 /* =========================
@@ -32,8 +31,6 @@ a, h1, h2, h3 { color: var(--agogy-gold); }
   border-bottom: 1px solid rgba(0,0,0,.25); /* precision edge */
   box-shadow: 0 2px 10px rgba(0,0,0,.25);
 }
-
-/* Breathing brightness (super subtle) */
 .agogy-bar.ag-breathe { animation: agBreathe 9s ease-in-out infinite; }
 @keyframes agBreathe { 0%,100% { filter: brightness(1) } 50% { filter: brightness(1.06) } }
 
@@ -86,7 +83,6 @@ body { padding-top: 45px; }
   border-top: 1px solid rgba(255,255,255,0.08);
   padding: 40px 24px;
 }
-
 .site-footer { background: #0f0f0f; color: #bbb; border-top: 1px solid rgba(255,255,255,0.08); }
 .ag-footer {
   display: flex; justify-content: center; align-items: center; gap: 12px;
@@ -101,7 +97,7 @@ body { padding-top: 45px; }
    ========================= */
 .page-header { position: relative; }
 
-/* Gold project name & tagline with animated shimmer (when .ag-shimmer is added) */
+/* Gold shimmer text (when .ag-shimmer added) */
 .page-header .project-name,
 .page-header .project-tagline {
   text-shadow: 0 2px 8px rgba(0,0,0,.25);
@@ -124,9 +120,28 @@ body { padding-top: 45px; }
   100% { background-position: 120% 0, 0 0;  filter: drop-shadow(0 2px 6px rgba(0,0,0,.25)); }
 }
 
+/* Knife-cut + TM */
+.project-name .knife {
+  display:inline-block;
+  transform:rotate(12deg) translateY(1px);
+  font-size:0.9em;
+  filter:drop-shadow(0 1px 2px rgba(0,0,0,0.4));
+  transition:transform .4s ease,filter .4s ease;
+}
+[data-motion="hype"] .project-name .knife {
+  transform:rotate(18deg) scale(1.2);
+  filter:drop-shadow(0 0 6px rgba(201,166,91,0.8));
+}
+.project-name .tm {
+  font-size: 0.5em;
+  vertical-align: super;
+  margin-left: 2px;
+  color: var(--agogy-gold);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
 /* =========================
    Royal Chameleon Hero Flow
-   (liquid gradient + purple shimmer)
    ========================= */
 .ag-ambient {
   position: relative;
@@ -213,7 +228,7 @@ body { padding-top: 45px; }
 .ag-toggle.on  { background: rgba(255,255,255,.75); }
 .ag-toggle.on .dot { background: var(--agogy-gold); }
 
-/* Motion kill-switch when Calm */
+/* Calm mode disables motion */
 [data-motion="calm"] .ag-shimmer,
 [data-motion="calm"] .ag-ambient::before,
 [data-motion="calm"] .btn.ag-pulse,
@@ -222,6 +237,13 @@ body { padding-top: 45px; }
   transition: none !important;
 }
 
+/* Hype speeds */
+[data-motion="hype"] .ag-ambient { animation-duration: 9s; }
+[data-motion="hype"] .ag-ambient::before { animation-duration: 6s; }
+[data-motion="hype"] .page-header .ag-shimmer { animation-duration: 4s; }
+[data-motion="hype"] .btn.ag-pulse::after { animation-duration: 1.8s; }
+[data-motion="hype"] .agogy-bar.ag-breathe { animation-duration: 6s; }
+
 /* Respect prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -229,11 +251,3 @@ body { padding-top: 45px; }
     animation: none !important; transition: none !important;
   }
 }
-
-/* Hype speeds (only when Showtime = ON) */
-[data-motion="hype"] .ag-ambient { animation-duration: 9s; }          /* chameleon flow 18s → 9s */
-[data-motion="hype"] .ag-ambient::before { animation-duration: 6s; }   /* shimmer drift 10s → 6s */
-[data-motion="hype"] .page-header .ag-shimmer { animation-duration: 4s; }  /* text shimmer faster */
-[data-motion="hype"] .btn.ag-pulse::after { animation-duration: 1.8s; }    /* CTA pulse quicker */
-[data-motion="hype"] .agogy-bar.ag-breathe { animation-duration: 6s; }     /* banner breathe quicker */
-
