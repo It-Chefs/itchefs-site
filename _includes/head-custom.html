@@ -6,10 +6,9 @@
 <!-- 🍯 Load Agogy Styles -->
 <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
 
-<!-- ⚙️ Agogy Reflex Injectors (footer, nav, motion, showtime) -->
+<!-- ⚙️ Agogy Reflex Injectors (footer, docs-nav, motion, brand, showtime) -->
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-
   /* === Footer Injector === */
   var f = document.querySelector('.site-footer');
   if (f) {
@@ -42,8 +41,6 @@ document.addEventListener('DOMContentLoaded', function () {
     nav.innerHTML = links.map(function (i) {
       return '<a href="' + i.href + '">' + i.label + '</a>';
     }).join('');
-
-    // Insert nav just before the hero
     header.insertAdjacentElement('beforebegin', nav);
 
     // Active link highlight
@@ -64,13 +61,24 @@ document.addEventListener('DOMContentLoaded', function () {
     hero.classList.add('ag-ambient');
     var name = hero.querySelector('.project-name');
     var tag  = hero.querySelector('.project-tagline');
-    if (name) name.classList.add('ag-shimmer');
-    if (tag)  tag.classList.add('ag-shimmer');
+
+    /* === Brand Name Override → IT🗡️Chefs™ === */
+    var brandHTML = 'IT<span class="knife">🗡️</span>Chefs<span class="tm">™</span>';
+    if (name) {
+      name.innerHTML = brandHTML;
+      name.classList.add('ag-shimmer');
+    }
+    if (tag) tag.classList.add('ag-shimmer');
+
+    // Also set browser tab title for consistency
+    try { document.title = 'IT-Chefs — Where Automation Meets Art™'; } catch(e){}
   }
 
+  // Banner breathe
   var bar = document.querySelector('.agogy-bar');
   if (bar) bar.classList.add('ag-breathe');
 
+  // CTA pulse (first .btn on page)
   var cta = document.querySelector('.btn');
   if (cta) cta.classList.add('ag-pulse');
 
@@ -93,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
     localStorage.setItem('agogy.motion', mode);
   }
 
-  // Create the pill toggle in the gold bar (top-right)
+  // pill toggle in the gold bar (top-right)
   var toggle = null, toggleLabel = null;
   if (bar) {
     toggle = document.createElement('button');
@@ -102,9 +110,8 @@ document.addEventListener('DOMContentLoaded', function () {
     toggle.setAttribute('aria-label','Toggle Showtime animations');
     toggle.innerHTML = '<span class="dot" aria-hidden="true"></span><span class="label">Showtime</span>';
     toggleLabel = toggle.querySelector('.label');
-   // bar.style.position = 'relative'; // ← delete or comment out
+    bar.style.position = 'fixed'; /* keep bar fixed */
     bar.appendChild(toggle);
-
 
     toggle.addEventListener('click', function(){
       var current = document.documentElement.getAttribute('data-motion') || 'hype';
