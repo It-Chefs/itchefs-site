@@ -2,6 +2,7 @@
 title: IT Chefs Kitchen
 layout: default
 description: Reflex playbooks, briefs, and automation exports cooked by Chef Avian & Sous-Chef Skunkah.
+header_classes: ag-ambient
 ---
 
 # 🍳 Welcome to the IT Chefs Kitchen
