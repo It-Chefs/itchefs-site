@@ -19,3 +19,42 @@ document.addEventListener('DOMContentLoaded', function () {
   `;
 });
 </script>
+
+<!-- Agogy Top Nav Injector (Docs-Friendly) -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var header = document.querySelector('.page-header');
+  if (!header) return;
+
+  var base = '{{ site.baseurl | default: "" }}';
+  var docsBase = base + '/docs';
+
+  var links = [
+    { href: docsBase + '/',              label: 'Home' },
+    { href: docsBase + '/kitchen/',      label: 'Briefs' },
+    { href: docsBase + '/automation/',   label: 'Playbooks' },
+    { href: docsBase + '/branding/',     label: 'Branding' },
+    { href: docsBase + '/tests/',        label: 'Tests' }
+  ];
+
+  var nav = document.createElement('nav');
+  nav.className = 'ag-nav';
+  nav.innerHTML = links.map(function (i) {
+    return '<a href="' + i.href + '">' + i.label + '</a>';
+  }).join('');
+
+  // Insert nav just before the main Cayman hero section
+  header.insertAdjacentElement('beforebegin', nav);
+
+  // Highlight current page link
+  var here = location.pathname;
+  Array.from(nav.querySelectorAll('a')).forEach(function(a){
+    try {
+      var ap = new URL(a.href, location.origin).pathname;
+      if (here === ap || (ap !== docsBase + '/' && here.startsWith(ap))) {
+        a.classList.add('active');
+      }
+    } catch(e) {}
+  });
+});
+</script>
