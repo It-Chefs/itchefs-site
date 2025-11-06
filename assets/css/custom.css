@@ -229,3 +229,11 @@ body { padding-top: 45px; }
     animation: none !important; transition: none !important;
   }
 }
+
+/* Hype speeds (only when Showtime = ON) */
+[data-motion="hype"] .ag-ambient { animation-duration: 9s; }          /* chameleon flow 18s → 9s */
+[data-motion="hype"] .ag-ambient::before { animation-duration: 6s; }   /* shimmer drift 10s → 6s */
+[data-motion="hype"] .page-header .ag-shimmer { animation-duration: 4s; }  /* text shimmer faster */
+[data-motion="hype"] .btn.ag-pulse::after { animation-duration: 1.8s; }    /* CTA pulse quicker */
+[data-motion="hype"] .agogy-bar.ag-breathe { animation-duration: 6s; }     /* banner breathe quicker */
+
