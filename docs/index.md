@@ -10,7 +10,7 @@ header_classes: ag-ambient
 <p align="center">
   <img src="https://it-chefs.github.io/itchefs-site/assets/img/itchefs-logo-gold.png"
        alt="IT Chefs Logo"
-       style="max-width:220px;height:auto;filter:drop-shadow(0 0 6px #C9A65B);margin:0.5rem 0 1rem;">
+       style="max-width:160px;height:auto;filter:drop-shadow(0 0 5px #C9A65B);margin:0.5rem 0 1rem;border-radius:12px;">
 </p>
 
 Where **automation meets artistry**.  
