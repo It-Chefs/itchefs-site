@@ -8,9 +8,9 @@ header_classes: ag-ambient
 # 🍳 Welcome to the IT Chefs Kitchen
 
 <p align="center">
-  <img src="{{ '/assets/img/itchefs-logo-gold.png' | relative_url }}"
+  <img src="https://it-chefs.github.io/itchefs-site/assets/img/itchefs-logo-gold.png"
        alt="IT Chefs Logo"
-       style="width:120px;height:auto;margin:0.5rem auto 1rem;display:block;filter:drop-shadow(0 0 3px #C9A65B);">
+       style="width:110px;height:auto;display:block;margin:0.5rem auto 1rem;filter:drop-shadow(0 0 3px #C9A65B);">
 </p>
 
 
