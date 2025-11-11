@@ -122,19 +122,19 @@ document.addEventListener('DOMContentLoaded', function () {
   if (prefersReduce) initial = 'calm';
   applyMode(initial);
 
-  /* === IT Chefs Hero Logo (PNG under title) === */
-  if (hero) {
-    var titleEl = hero.querySelector('.project-name') || hero;
-    if (!hero.querySelector('.ag-logo')) {
-      var logoSrc = "{{ '/assets/img/itchefs-mark.png' | relative_url }}";
-      var img = document.createElement('img');
-      img.className = 'ag-logo';
-      img.src = logoSrc;
-      img.alt = 'IT Chefs Logo';
-      img.decoding = 'async';
-      img.loading = 'eager';
-      titleEl.insertAdjacentElement('afterend', img);
-    }
+ /* === IT Chefs Hero Logo (PNG under title) === */
+if (hero) {
+  var titleEl = hero.querySelector('.project-name') || hero;
+  if (!hero.querySelector('.ag-logo')) {
+    var logoSrc = "{{ '/assets/img/itchefs-logo-gold.png' | relative_url }}";
+    var img = document.createElement('img');
+    img.className = 'ag-logo';
+    img.src = logoSrc;
+    img.alt = 'IT Chefs Logo';
+    img.decoding = 'async';
+    img.loading = 'eager';
+    titleEl.insertAdjacentElement('afterend', img);
   }
+}
 });
 </script>
