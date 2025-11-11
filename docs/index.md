@@ -7,6 +7,12 @@ header_classes: ag-ambient
 
 # 🍳 Welcome to the IT Chefs Kitchen
 
+<p align="center">
+  <img src="{{ site.baseurl }}/assets/img/itchefs-logo-gold.png"
+       alt="IT Chefs Logo"
+       style="max-width:220px;height:auto;filter:drop-shadow(0 0 6px #C9A65B);margin:0.5rem 0 1rem;">
+</p>
+
 Where **automation meets artistry**.  
 Here you’ll find living recipes for ReflexRun AI, automation playbooks, and chef-tested briefs straight from the kitchen.
 
