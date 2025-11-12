@@ -341,3 +341,83 @@ body{ padding-top:45px; } /* keep content clear of banner */
 }
 [data-motion="hype"] .ag-crest{ opacity:0; transform:translateY(4px) scale(.92); filter:drop-shadow(0 0 0 transparent); }
 [data-motion="calm"] .ag-crest{ opacity:.9; transform:translateY(0) scale(1); }
+
+/* ================================
+   Full-bleed backgrounds (no gutters)
+   ================================ */
+
+/* 0) Generic helper you can reuse if needed */
+.ag-bleed {
+  position: relative;
+  overflow: visible;
+}
+.ag-bleed::before {
+  content: "";
+  position: absolute;
+  left: 50%; top: 0; height: 100%;
+  width: 100vw; transform: translateX(-50%);
+  z-index: -1;  /* paint behind content */
+}
+
+/* 1) HERO: move the gradient to a full-bleed pseudo to cover side gutters */
+.ag-ambient {
+  position: relative;
+  overflow: visible;          /* important: don't clip the pseudo */
+  background: transparent;    /* gradient moves to ::after */
+}
+.ag-ambient::after {
+  content: "";
+  position: absolute;
+  left: 50%; top: 0; height: 100%;
+  width: 100vw; transform: translateX(-50%);
+  z-index: -1;
+  background: linear-gradient(
+    120deg,
+    #04619f, #06beb6, #6236ff, #C9A65B, #04619f
+  );
+  background-size: 500% 500%;
+  animation: agChameleon 18s ease-in-out infinite;
+}
+/* keep your shimmer overlay on ::before as-is */
+.ag-ambient::before { z-index: 0; }
+
+/* 2) NAV: full-bleed the dark glass background */
+.ag-nav { position: relative; overflow: visible; background: transparent; }
+.ag-nav::before {
+  content: "";
+  position: absolute;
+  left: 50%; top: 0; height: 100%;
+  width: 100vw; transform: translateX(-50%);
+  z-index: -1;
+  background: rgba(15,15,15,0.92);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+/* 3) MAIN CONTENT: full-bleed dark section behind the centered column */
+.main-content { position: relative; overflow: visible; background: transparent; }
+.main-content::before {
+  content: "";
+  position: absolute;
+  left: 50%; top: 0; height: 100%;
+  width: 100vw; transform: translateX(-50%);
+  z-index: -1;
+  background: #121212;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+/* 4) FOOTER: full-bleed background so gutters aren’t black there either */
+.site-footer { position: relative; overflow: visible; background: transparent; }
+.site-footer::before {
+  content: "";
+  position: absolute;
+  left: 50%; top: 0; height: 100%;
+  width: 100vw; transform: translateX(-50%);
+  z-index: -1;
+  background: #0f0f0f;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+/* 5) (Optional) top gold bar can also be full-bleed */
+.agogy-bar { position: fixed; left: 0; right: 0; } /* already full width */
+
