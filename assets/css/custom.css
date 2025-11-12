@@ -32,6 +32,32 @@ body {
     opacity 0.6s ease;
 }
 
+/* ================================
+   Logo Breathing Animation
+   ================================ */
+
+@keyframes agBreath {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 4px rgba(201,166,91,0.5));
+  }
+  50% {
+    transform: scale(1.06);
+    filter: drop-shadow(0 0 10px rgba(201,166,91,0.9));
+  }
+}
+
+/* Applies subtle breathing to logo during Showtime */
+[data-motion="hype"] .ag-logo {
+  animation: agBreath 6s ease-in-out infinite;
+}
+
+/* Optional: calmer breathing even when in calm mode */
+[data-motion="calm"] .ag-logo {
+  animation: agBreath 10s ease-in-out infinite;
+  opacity: 0.95;
+}
+
 
 /* =========================
    Fixed Gold Banner (top)
