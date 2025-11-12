@@ -341,3 +341,121 @@ body{ padding-top:45px; } /* keep content clear of banner */
 }
 [data-motion="hype"] .ag-crest{ opacity:0; transform:translateY(4px) scale(.92); filter:drop-shadow(0 0 0 transparent); }
 [data-motion="calm"] .ag-crest{ opacity:.9; transform:translateY(0) scale(1); }
+
+
+/* =======================================
+   Agogy Gold – Extra Polish & Wow Effects
+   ======================================= */
+
+/* 1) Gold torch swipe under the title (animated underline) */
+.project-name.ag-underline {
+  position: relative;
+  padding-bottom: .25rem;
+}
+.project-name.ag-underline::after {
+  content:"";
+  position:absolute; left:50%; bottom:-6px; transform:translateX(-50%) scaleX(0);
+  width:min(480px, 62vw); height:3px; border-radius:2px;
+  background: linear-gradient(90deg,#0000,#FFD77B 10%,#C9A65B 40%,#FFD77B 80%,#0000);
+  box-shadow: 0 0 16px rgba(201,166,91,.45);
+  transition: transform .9s cubic-bezier(.22,1,.36,1), opacity .6s ease;
+  opacity: .0;
+}
+[data-armed="true"] .project-name.ag-underline::after {
+  transform:translateX(-50%) scaleX(1); opacity: 1;
+}
+
+/* 2) Scroll-to-top gold FAB */
+.ag-top {
+  position: fixed; right: 18px; bottom: 18px; z-index: 1000;
+  width: 42px; height: 42px; border-radius: 999px;
+  display:flex; align-items:center; justify-content:center;
+  background: linear-gradient(180deg,#FFE39A,#C9A65B);
+  color:#111; font-weight: 800; border:1px solid rgba(0,0,0,.15);
+  box-shadow: 0 8px 22px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.6);
+  cursor: pointer; user-select:none;
+  transform: translateY(12px); opacity: 0; pointer-events: none;
+  transition: opacity .35s ease, transform .35s ease, filter .25s ease;
+}
+.ag-top:hover { filter: brightness(1.06); }
+.ag-top.on  { transform: translateY(0); opacity: 1; pointer-events: auto; }
+
+/* 3) Sparkles overlay for hero (very light weight) */
+.ag-ambient .ag-sparkles {
+  pointer-events:none; position:absolute; inset:0; z-index:0;
+  background:
+    radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,.35) 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 68% 22%, rgba(255,255,255,.28) 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 40% 70%, rgba(255,255,255,.25) 50%, transparent 51%),
+    radial-gradient(2px 2px at 85% 55%, rgba(255,255,255,.32) 50%, transparent 51%);
+  mix-blend-mode: screen;
+  opacity:.0;
+  animation: agSparkle 6s ease-in-out infinite;
+}
+@keyframes agSparkle { 0%,100%{opacity:.1} 50%{opacity:.35} }
+
+/* 4) Section divider */
+.ag-divider {
+  --w: min(680px, 72vw);
+  width: var(--w); height: 2px; margin: 28px auto;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #0000, #C9A65B 15%, #FFD77B 50%, #C9A65B 85%, #0000);
+  box-shadow: 0 0 10px rgba(201,166,91,.28);
+}
+
+/* 5) Agogy callouts (info/success/warn) */
+.ag-callout{
+  padding:14px 16px; border-radius:12px; margin:16px 0;
+  background:#0f0f0f; border:1px solid rgba(255,255,255,.08);
+  position:relative;
+}
+.ag-callout::before{
+  content:""; position:absolute; left:0; top:0; bottom:0; width:6px; border-radius:12px 0 0 12px;
+  background:linear-gradient(#FFD77B,#C9A65B);
+}
+.ag-callout.success::before{ background:linear-gradient(#88F7B2,#2ECC71); }
+.ag-callout.warn::before{ background:linear-gradient(#FFD6A3,#FF9E50); }
+
+/* 6) Card lift pattern (opt-in utility) */
+.ag-card{
+  background:#141414; border:1px solid rgba(255,255,255,.08); border-radius:16px;
+  box-shadow:0 8px 22px rgba(0,0,0,.25);
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.ag-card:hover{ transform: translateY(-3px); box-shadow:0 14px 32px rgba(0,0,0,.35); border-color: rgba(201,166,91,.35); }
+
+/* 7) Code blocks, with gold header lip */
+pre, code, kbd, samp{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+pre{
+  background:#0f1012; border:1px solid rgba(255,255,255,.08); color:#dcdcdc;
+  padding: 14px 16px; border-radius: 12px; position: relative; overflow:auto;
+}
+pre::before{
+  content:""; position:absolute; left:0; right:0; top:0; height:3px; border-radius:12px 12px 0 0;
+  background: linear-gradient(90deg,#C9A65B,#FFD77B,#C9A65B);
+  opacity:.85;
+}
+
+/* 8) Fancy links */
+a{
+  text-decoration: none; border-bottom: 1px dashed rgba(201,166,91,.55);
+  transition: color .18s ease, border-color .18s ease, text-shadow .18s ease;
+}
+a:hover{
+  color:#fff; border-bottom-color: rgba(255,215,123,.85);
+  text-shadow: 0 0 10px rgba(201,166,91,.45);
+}
+
+/* 9) Strong but elegant focus ring */
+:where(a,button,input,select,textarea,[role="button"]):focus{
+  outline: 2px solid rgba(201,166,91,.85);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(201,166,91,.25);
+}
+
+/* 10) Print niceties */
+@media print{
+  .agogy-bar,.ag-nav,.ag-toggle,.ag-top{ display: none !important; }
+  .ag-ambient, .ag-ambient::before, .ag-ambient::after{ animation:none !important; }
+}
+
