@@ -47,29 +47,33 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // ===== motion polish =====
-  var hero = document.querySelector('.page-header');
-  if (hero) {
-    hero.classList.add('ag-ambient');
-    var name = hero.querySelector('.project-name');
-    var tag  = hero.querySelector('.project-tagline');
+  // ===== brand polish =====
+  if (header) {
+    header.classList.add('ag-ambient');
+    var name = header.querySelector('.project-name');
+    var tag  = header.querySelector('.project-tagline');
     var brandHTML = 'IT&nbsp;Chefs<span class="tm">™</span>';
     if (name) { name.innerHTML = brandHTML; name.classList.add('ag-shimmer'); }
     if (tag)  { tag.classList.add('ag-shimmer'); }
     try { document.title = 'IT Chefs — Where Automation Meets Art™'; } catch(e){}
   }
 
-  // ===== showtime toggle =====
+  // ===== Calm ⇄ Showtime (hype) toggle =====
   var bar = document.querySelector('.agogy-bar');
   var toggle = null, toggleLabel = null;
+
   function applyMode(mode){
+    // write data attribute for CSS driven transitions
     document.documentElement.setAttribute('data-motion', mode);
     localStorage.setItem('agogy.motion', mode);
+
+    // toggle pill label/state
     if (toggle) {
       toggle.classList.toggle('on', mode === 'hype');
       toggleLabel.textContent = 'Showtime: ' + (mode === 'hype' ? 'ON' : 'OFF');
     }
   }
+
   if (bar) {
     toggle = document.createElement('button');
     toggle.className = 'ag-toggle';
@@ -85,30 +89,24 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     bar.classList.add('ag-breathe');
   }
+
   var prefersReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   applyMode(prefersReduce ? 'calm' : (localStorage.getItem('agogy.motion') || 'hype'));
 
-  // ===== hero logo (single source of truth; same path as when it worked) =====
-  if (hero && !hero.querySelector('.ag-logo')) {
-    var titleEl = hero.querySelector('.project-name') || hero;
+  // ===== Hero logo (correct path) =====
+  if (header && !header.querySelector('.ag-logo')) {
+    var titleEl = header.querySelector('.project-name') || header;
+
     var img = document.createElement('img');
     img.className = 'ag-logo';
     img.alt = 'IT Chefs Logo';
     img.decoding = 'async';
     img.loading  = 'eager';
 
-    // This path is correct when the file lives at: docs/assets/img/itchefs-mark.png
+    // ✅ correct logo path you confirmed
     img.src = "{{ '/assets/img/itchefs-logo-gold.png' | relative_url }}";
 
-    // tiny belt-and-suspenders: if primary ever fails, try docs/ variant once
-    var triedFallback = false;
-    img.onerror = function(){
-      if (!triedFallback) {
-        triedFallback = true;
-        img.src = base + '/docs/assets/img/itchefs-mark.png';
-      }
-    };
-
+    // gentle halo handled via CSS; we only inject the node here
     titleEl.insertAdjacentElement('afterend', img);
   }
 });
