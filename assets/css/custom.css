@@ -459,3 +459,40 @@ a:hover{
   .ag-ambient, .ag-ambient::before, .ag-ambient::after{ animation:none !important; }
 }
 
+
+/* ================================
+   Gutter Glow – subtle edge color
+   (no layout changes, no breakage)
+   ================================ */
+
+/* Calm: keep your charcoal but add a soft top glow so side gutters aren't flat black */
+[data-motion="calm"] body{
+  background:
+    radial-gradient(1200px 600px at 50% -10%, rgba(201,166,91,.06), transparent 60%),
+    #0C0E16; /* your calm body bg */
+}
+
+/* Showtime: very light animated chameleon fade only in the gutters (under content) */
+@keyframes agGutterFlow {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+[data-motion="hype"] body{
+  /* faint version of your hero gradient so it doesn’t fight the sections */
+  background:
+    linear-gradient(
+      120deg,
+      rgba(4,97,159,.10),
+      rgba(6,190,182,.10),
+      rgba(98,54,255,.12),
+      rgba(201,166,91,.10),
+      rgba(4,97,159,.10)
+    );
+  background-size: 500% 500%;
+  animation: agGutterFlow 28s ease-in-out infinite;
+}
+
+/* Keep your actual sections exactly as-is */
+
