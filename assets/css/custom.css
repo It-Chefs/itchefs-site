@@ -1,274 +1,343 @@
 /* =========================
-   Agogy Gold — Global Base
+   Agogy Gold – Global Base
    ========================= */
-:root {
-  --agogy-gold: #C9A65B;
-  --charcoal: #1A1A1A;
-  --warm-gray: #D3D3D3;
+
+:root{
+  --agogy-gold:#C9A65B;
+  --charcoal:#1A1A1A;
+  --warm-gray:#D3D3D3;
 }
 
-html, body {
-  background: var(--charcoal);
-  color: var(--warm-gray);
-  transition: background .6s ease, color .4s ease;
-  min-height: 100%;
-}
-a, h1, h2, h3 { color: var(--agogy-gold); }
-
-/* =========================
-   Page Header / Transitions
-   ========================= */
-.page-header {
-  position: relative;
-  transition: background .6s ease, box-shadow .6s ease, filter .6s ease;
-  padding-bottom: 2.5rem;
-  border-bottom: none;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+html,body{
+  background:var(--charcoal);
+  color:var(--warm-gray);
+  transition:background .6s ease,color .4s ease;
 }
 
-/* Royal Chameleon base (animated bg) */
-.ag-ambient {
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(120deg, #04619f, #06beb6, #6236ff, #C9A65B, #04619f);
-  background-size: 500% 500%;
-  animation: agChameleon 18s ease-in-out infinite;
-}
-@keyframes agChameleon {
-  0% { background-position: 0% 50%; }
-  25% { background-position: 50% 100%; }
-  50% { background-position: 100% 50%; }
-  75% { background-position: 50% 0%; }
-  100% { background-position: 0% 50%; }
+a,h1,h2,h3{ color:var(--agogy-gold); }
+
+/* ================================
+   Calm ⇄ Showtime Transitions
+   ================================ */
+
+.page-header{ transition:background .6s ease, box-shadow .6s ease; }
+
+.ag-logo,.project-name{
+  transition:
+    filter .6s ease,
+    text-shadow .6s ease,
+    transform .6s ease,
+    opacity .6s ease;
 }
 
-/* Floating shimmer overlay for depth */
-.ag-ambient::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at 30% 40%, rgba(255,255,255,0.07), transparent 65%),
-    radial-gradient(circle at 70% 60%, rgba(98,54,255,0.15), transparent 70%);
-  mix-blend-mode: overlay;
-  pointer-events: none;
-  animation: agAuroraShimmer 10s ease-in-out infinite alternate;
-}
-@keyframes agAuroraShimmer {
-  0%   { transform: translate(0,0) scale(1);   opacity: .7; }
-  50%  { transform: translate(-6%, 5%) scale(1.05); opacity: 1; }
-  100% { transform: translate(8%, -5%) scale(1);    opacity: .8; }
+/* ================================
+   Logo Breathing Animation
+   ================================ */
+
+@keyframes agBreath{
+  0%,100%{ transform:scale(1);   filter:drop-shadow(0 0 4px rgba(201,166,91,.5)); }
+  50%    { transform:scale(1.06);filter:drop-shadow(0 0 10px rgba(201,166,91,.9)); }
 }
 
-/* Motion modes (Calm vs Showtime) */
-[data-motion="calm"] .ag-ambient { animation-duration: 18s; }
-[data-motion="hype"] .ag-ambient { animation-duration: 9s; }
-[data-motion="hype"] .ag-ambient::before { animation-duration: 6s; }
+[data-motion="hype"] .ag-logo{ animation:agBreath 6s ease-in-out infinite; }
+[data-motion="calm"] .ag-logo{ animation:agBreath 10s ease-in-out infinite; opacity:.95; }
 
-/* Title shimmer (both modes, different tempo) */
-.page-header .project-name,
-.page-header .project-tagline { text-shadow: 0 2px 8px rgba(0,0,0,.25); }
+/* ================================
+   Title Shimmer (Showtime & Calm)
+   ================================ */
 
-.page-header .project-name.ag-shimmer,
-.page-header .project-tagline.ag-shimmer {
-  background-image:
-    linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.35) 12%, rgba(255,255,255,0) 24%),
-    linear-gradient(90deg, #FFD77B, #C9A65B);
-  background-size: 220% 100%, 100% 100%;
-  background-repeat: no-repeat;
-  background-position: -120% 0, 0 0;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: agTextShimmer 6.5s ease-in-out infinite;
-}
-@keyframes agTextShimmer {
-  0%   { background-position: -120% 0, 0 0; filter: drop-shadow(0 2px 6px rgba(0,0,0,.25)); }
-  46%  { background-position: 120% 0, 0 0;  filter: drop-shadow(0 2px 8px rgba(0,0,0,.35)); }
-  100% { background-position: 120% 0, 0 0;  filter: drop-shadow(0 2px 6px rgba(0,0,0,.25)); }
-}
-.project-name .tm {
-  font-size: .5em; vertical-align: super; margin-left: 2px;
-  color: var(--agogy-gold); text-shadow: 0 1px 3px rgba(0,0,0,.3);
+@keyframes agTitleShimmer{
+  0%{
+    text-shadow:0 0 4px rgba(201,166,91,.5),0 0 12px rgba(201,166,91,.2);
+    letter-spacing:.02em;
+  }
+  40%{
+    text-shadow:0 0 9px rgba(201,166,91,.9),0 0 18px rgba(255,228,150,.35);
+    letter-spacing:.04em;
+  }
+  100%{
+    text-shadow:0 0 5px rgba(201,166,91,.6),0 0 14px rgba(201,166,91,.25);
+    letter-spacing:.02em;
+  }
 }
 
-/* =========================
-   Hero Logo (single style)
-   ========================= */
-.ag-logo {
-  display: block;
-  margin: .75rem auto 1.25rem;
-  width: clamp(92px, 10vw, 140px);
-  height: auto;
-  opacity: 0;
-  transform: translateY(6px) scale(.98);
-  filter: drop-shadow(0 0 4px #d6b877) drop-shadow(0 0 10px #b6923e);
-  animation:
-    agLogoGlow 3s ease-in-out infinite alternate,
-    agLogoFloat 8s ease-in-out infinite;
-  animation-delay: 120ms;
-  animation-fill-mode: forwards;
-  transition: filter .6s ease, transform .6s ease, opacity .6s ease;
+[data-motion="hype"] .project-name{
+  animation:agTitleShimmer 5.5s ease-in-out infinite;
+  color:var(--agogy-gold);
 }
-@keyframes agLogoGlow {
-  0%   { filter: drop-shadow(0 0 5px #d6b877) drop-shadow(0 0 10px #b6923e); transform: translateY(6px) scale(.98); opacity: 0; }
-  50%  { filter: drop-shadow(0 0 18px #ffd983) drop-shadow(0 0 28px #e6c879); transform: translateY(0) scale(1.02); opacity: .95; }
-  100% { filter: drop-shadow(0 0 6px #d6b877)  drop-shadow(0 0 12px #b6923e); transform: translateY(2px) scale(1);    opacity: 1; }
+[data-motion="calm"] .project-name{
+  animation:agTitleShimmer 10s ease-in-out infinite;
+  color:var(--agogy-gold);
+  opacity:.96;
 }
-@keyframes agLogoFloat { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-5px) } }
-.ag-logo:hover {
-  transform: translateY(-2px) scale(1.06);
-  filter: drop-shadow(0 0 20px #f5d878) drop-shadow(0 0 30px #e6c879);
-  transition: transform .25s ease, filter .25s ease;
-}
-
-/* Logo wrap + golden halo (for future crest layering) */
-.ag-logo-wrap { position: relative; display: inline-block; }
-.ag-logo-wrap::after{
-  content:"";
-  position:absolute; inset:-18% -22%;
-  border-radius:50%;
-  background: radial-gradient(ellipse at 50% 45%,
-              rgba(201,166,91,.35) 0%,
-              rgba(201,166,91,.12) 45%,
-              transparent 62%);
-  opacity: 0;
-  transform: scale(.94);
-  transition: opacity .6s ease, transform .8s ease, filter .6s ease;
-  filter: blur(18px);
-}
-[data-motion="hype"] .ag-logo-wrap::after { opacity:.9;  transform:scale(1);   animation: haloPulse 4.8s ease-in-out infinite; }
-[data-motion="calm"] .ag-logo-wrap::after { opacity:.40; transform:scale(.96); }
-@keyframes haloPulse { 0% {opacity:.65; filter:blur(16px)} 50% {opacity:.98; filter:blur(24px)} 100% {opacity:.65; filter:blur(16px)} }
-
-/* Optional crest (hidden in Showtime) */
-.ag-crest{
-  position:absolute; right:-10px; bottom:-10px;
-  width:clamp(20px,2.4vw,36px); height:auto;
-  opacity:.85; filter:drop-shadow(0 0 4px #b6923e);
-  transition: opacity .35s ease, transform .35s ease, filter .35s ease;
-}
-[data-motion="hype"] .ag-crest{ opacity:0; transform:translateY(4px) scale(.92); filter:drop-shadow(0 0 0 transparent); }
-[data-motion="calm"] .ag-crest{ opacity:.9; transform:translateY(0) scale(1); }
 
 /* =========================
    Fixed Gold Banner (top)
    ========================= */
-.agogy-bar {
-  position: fixed; top: 0; left: 0; width: 100%; z-index: 999;
-  background: linear-gradient(90deg, #C9A65B, #D8B978 40%, #C9A65B);
-  color: #111;
-  font-family: Poppins, Inter, system-ui, sans-serif;
-  font-weight: 600; text-align: center;
-  padding: 10px 0; letter-spacing: .4px;
-  border-bottom: 1px solid rgba(0,0,0,.25);
-  box-shadow: 0 2px 10px rgba(0,0,0,.25);
-}
-.agogy-bar.ag-breathe { animation: agBreathe 9s ease-in-out infinite; }
-@keyframes agBreathe { 0%,100% { filter: brightness(1) } 50% { filter: brightness(1.06) } }
 
-/* Keep content clear of banner */
-body { padding-top: 45px; }
+.agogy-bar{
+  position:fixed; top:0; left:0; width:100%; z-index:999;
+  background:linear-gradient(90deg,#C9A65B,#D8B978 40%,#C9A65B);
+  color:#111;
+  font-family:Poppins,Inter,system-ui,sans-serif;
+  font-weight:600; text-align:center;
+  padding:10px 0; letter-spacing:.4px;
+  border-bottom:1px solid rgba(0,0,0,.25);
+  box-shadow:0 2px 10px rgba(0,0,0,.25);
+}
+.agogy-bar.ag-breathe{ animation:agBreathe 9s ease-in-out infinite; }
+
+@keyframes agBreathe{ 0%,100%{ filter:brightness(1) } 50%{ filter:brightness(1.06) } }
+
+body{ padding-top:45px; } /* keep content clear of banner */
 
 /* =========================
    Docs-Friendly Top Nav
    ========================= */
+
 .ag-nav{
-  position: sticky; top: 45px; z-index: 998;
-  display: flex; gap: 16px; justify-content: center; align-items: center;
-  padding: 10px 16px;
-  background: rgba(15,15,15,0.92);
-  backdrop-filter: blur(6px);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  position:sticky; top:45px; z-index:998;
+  display:flex; gap:16px; justify-content:center; align-items:center;
+  padding:10px 16px;
+  background:rgba(15,15,15,.92);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid rgba(255,255,255,.08);
 }
 .ag-nav a{
-  color: #d8d8d8; text-decoration: none;
-  padding: 6px 12px; border-radius: 10px;
-  border: 1px solid transparent;
-  transition: filter .2s ease, border-color .2s ease, background .2s ease;
-  white-space: nowrap;
+  color:#d8d8d8; text-decoration:none;
+  padding:6px 12px; border-radius:10px;
+  border:1px solid transparent;
+  transition:filter .2s ease, border-color .2s ease, background .2s ease;
+  white-space:nowrap;
 }
-.ag-nav a:hover{ color: #fff; border-color: rgba(201,166,91,0.5); }
+.ag-nav a:hover{ color:#fff; border-color:rgba(201,166,91,.5); }
 .ag-nav a.active{
-  color: #111;
-  background: linear-gradient(90deg,#C9A65B,#D8B978 60%,#C9A65B);
-  border-color: transparent; font-weight: 600;
-  box-shadow: 0 2px 10px rgba(0,0,0,.25);
+  color:#111;
+  background:linear-gradient(90deg,#C9A65B,#D8B978 60%,#C9A65B);
+  border-color:transparent; font-weight:600;
+  box-shadow:0 2px 10px rgba(0,0,0,.25);
 }
-@media (max-width: 520px){
-  .ag-nav{ overflow-x: auto; justify-content: flex-start; }
+@media (max-width:520px){
+  .ag-nav{ overflow-x:auto; justify-content:flex-start; }
 }
 
 /* =========================
    Content & Footer Polish
    ========================= */
-.main-content {
-  background: #121212; color: var(--warm-gray);
-  border-top: 1px solid rgba(255,255,255,0.08);
-  padding: 40px 24px;
+
+.main-content{
+  background:#121212; color:var(--warm-gray);
+  border-top:1px solid rgba(255,255,255,.08);
+  padding:40px 24px;
+  position:relative; z-index:1; /* sits above hero bleed */
 }
-.site-footer { background: #0f0f0f; color: #bbb; border-top: 1px solid rgba(255,255,255,0.08); }
-.ag-footer {
-  display: flex; justify-content: center; align-items: center; gap: 12px;
-  padding: 16px 12px; font: 500 14px/1.4 Inter, system-ui, sans-serif;
+.site-footer{ background:#0f0f0f; color:#bbb; border-top:1px solid rgba(255,255,255,.08); }
+.ag-footer{
+  display:flex; justify-content:center; align-items:center; gap:12px;
+  padding:16px 12px; font:500 14px/1.4 Inter,system-ui,sans-serif;
 }
-.ag-footer a { color: #d6d6d6; text-decoration: none; border-bottom: 1px solid transparent; }
-.ag-footer a:hover { border-color: currentColor; }
-.ag-footer strong { color: var(--agogy-gold); }
+.ag-footer a{ color:#d6d6d6; text-decoration:none; border-bottom:1px solid transparent; }
+.ag-footer a:hover{ border-color:currentColor; }
+.ag-footer strong{ color:var(--agogy-gold); }
+
+/* =========================
+   Hero / Project Title
+   ========================= */
+
+.page-header{ position:relative; }
+.page-header .project-name{ letter-spacing:.5px; }
+.page-header .project-name,
+.page-header .project-tagline{ text-shadow:0 2px 8px rgba(0,0,0,.25); }
+
+.page-header .project-name.ag-shimmer,
+.page-header .project-tagline.ag-shimmer{
+  background-image:
+    linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.35) 12%, rgba(255,255,255,0) 24%),
+    linear-gradient(90deg,#FFD77B,#C9A65B);
+  background-size:220% 100%, 100% 100%;
+  background-repeat:no-repeat;
+  background-position:-120% 0, 0 0;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:agTextShimmer 6.5s ease-in-out infinite;
+}
+@keyframes agTextShimmer{
+  0%  { background-position:-120% 0, 0 0; filter:drop-shadow(0 2px 6px rgba(0,0,0,.25)); }
+  46% { background-position: 120% 0, 0 0; filter:drop-shadow(0 2px 8px rgba(0,0,0,.35)); }
+  100%{ background-position: 120% 0, 0 0; filter:drop-shadow(0 2px 6px rgba(0,0,0,.25)); }
+}
+.project-name .tm{
+  font-size:.5em; vertical-align:super; margin-left:2px;
+  color:var(--agogy-gold); text-shadow:0 1px 3px rgba(0,0,0,.3);
+}
+
+/* =========================
+   Royal Chameleon Hero Flow
+   ========================= */
+
+.ag-ambient{
+  position:relative; overflow:hidden;
+  background:linear-gradient(120deg,#04619f,#06beb6,#6236ff,#C9A65B,#04619f);
+  background-size:500% 500%;
+  animation:agChameleon 18s ease-in-out infinite;
+}
+@keyframes agChameleon{
+  0%{ background-position:0% 50%; }
+  25%{ background-position:50% 100%; }
+  50%{ background-position:100% 50%; }
+  75%{ background-position:50% 0%; }
+  100%{ background-position:0% 50%; }
+}
+
+/* Floating shimmer overlay for depth */
+.ag-ambient::before{
+  content:""; position:absolute; inset:0;
+  background:
+    radial-gradient(circle at 30% 40%, rgba(255,255,255,.07), transparent 65%),
+    radial-gradient(circle at 70% 60%, rgba(98,54,255,.15), transparent 70%);
+  mix-blend-mode:overlay; pointer-events:none;
+  animation:agAuroraShimmer 10s ease-in-out infinite alternate;
+}
+@keyframes agAuroraShimmer{
+  0%  { transform:translate(0,0) scale(1);   opacity:.7; }
+  50% { transform:translate(-6%,5%) scale(1.05); opacity:1; }
+  100%{ transform:translate(8%,-5%) scale(1);  opacity:.8; }
+}
+
+/* === Gradient bleed under hero so side gutters aren't black === */
+.page-header::after{
+  content:"";
+  position:absolute;
+  left:50%; transform:translateX(-50%);
+  bottom:-42px;
+  width:100vw; height:96px;
+  background:inherit; /* reuse animated gradient */
+  opacity:.85;
+  filter:blur(26px) saturate(1.05);
+  pointer-events:none;
+  z-index:0;
+}
 
 /* =========================
    CTA: Gold Button + Pulse
    ========================= */
-.btn {
-  background: #C9A65B !important;
-  border-color: rgba(0,0,0,.15) !important;
-  color: #111 !important;
-  box-shadow: 0 2px 10px rgba(0,0,0,.25);
-}
-.btn:focus, .btn:hover { filter: brightness(1.08); box-shadow: 0 4px 16px rgba(0,0,0,.35); }
 
-.btn.ag-pulse { position: relative; isolation: isolate; }
-.btn.ag-pulse::after {
-  content:""; position:absolute; inset:-6px; border-radius: 12px;
-  box-shadow: 0 0 0 0 rgba(201,166,91,.45);
-  animation: agPulse 2.6s ease-out infinite; z-index: -1;
+.btn{
+  background:#C9A65B !important;
+  border-color:rgba(0,0,0,.15) !important;
+  color:#111 !important;
+  box-shadow:0 2px 10px rgba(0,0,0,.25);
 }
-@keyframes agPulse {
-  0%   { opacity:.8;  box-shadow: 0 0 0 0 rgba(201,166,91,.45); }
-  70%  { opacity:0;   box-shadow: 0 0 0 22px rgba(201,166,91,0); }
-  100% { opacity:0;   box-shadow: 0 0 0 22px rgba(201,166,91,0); }
+.btn:focus,.btn:hover{ filter:brightness(1.08); box-shadow:0 4px 16px rgba(0,0,0,.35); }
+.btn.ag-pulse{ position:relative; isolation:isolate; }
+.btn.ag-pulse::after{
+  content:""; position:absolute; inset:-6px; border-radius:12px;
+  box-shadow:0 0 0 0 rgba(201,166,91,.45);
+  animation:agPulse 2.6s ease-out infinite; z-index:-1;
 }
-
-/* =========================
-   Showtime Toggle Pill
-   ========================= */
-.ag-toggle {
-  position: absolute; right: 10px; top: 6px;
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 6px 10px; border-radius: 999px;
-  background: rgba(0,0,0,.25);
-  color: #111; font: 600 12px/1 Inter, system-ui, sans-serif;
-  border: 1px solid rgba(0,0,0,.2);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 2px 6px rgba(0,0,0,.15);
-  cursor: pointer; user-select: none;
+@keyframes agPulse{
+  0%  { opacity:.8; box-shadow:0 0 0 0 rgba(201,166,91,.45); }
+  70% { opacity:0;  box-shadow:0 0 0 22px rgba(201,166,91,0); }
+  100%{ opacity:0;  box-shadow:0 0 0 22px rgba(201,166,91,0); }
 }
-.ag-toggle .dot {
-  width: 10px; height: 10px; border-radius: 50%;
-  background: #3a3a3a; box-shadow: inset 0 0 0 2px rgba(0,0,0,.25);
-}
-.ag-toggle.on  { background: rgba(255,255,255,.75); }
-.ag-toggle.on .dot { background: var(--agogy-gold); }
 
 /* =========================
-   Reduced Motion Safety
+   Showtime Toggle
    ========================= */
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  .ag-shimmer, .ag-ambient, .ag-ambient::before,
-  .btn.ag-pulse, .agogy-bar.ag-breathe,
-  .ag-logo, .ag-logo-wrap::after {
-    animation: none !important;
-    transition: none !important;
+
+.ag-toggle{
+  position:absolute; right:10px; top:6px;
+  display:inline-flex; align-items:center; gap:8px;
+  padding:6px 10px; border-radius:999px;
+  background:rgba(0,0,0,.25); color:#111; font:600 12px/1 Inter,system-ui,sans-serif;
+  border:1px solid rgba(0,0,0,.2);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.35), 0 2px 6px rgba(0,0,0,.15);
+  cursor:pointer; user-select:none;
+}
+.ag-toggle .dot{
+  width:10px; height:10px; border-radius:50%;
+  background:#3a3a3a; box-shadow:inset 0 0 0 2px rgba(0,0,0,.25);
+}
+.ag-toggle.on{ background:rgba(255,255,255,.75); }
+.ag-toggle.on .dot{ background:var(--agogy-gold); }
+
+/* Motion speed accents */
+[data-motion="calm"] .ag-shimmer,
+[data-motion="calm"] .ag-ambient::before,
+[data-motion="calm"] .btn.ag-pulse,
+[data-motion="calm"] .agogy-bar.ag-breathe{
+  animation:none !important; transition:none !important;
+}
+[data-motion="hype"] .ag-ambient{ animation-duration:9s; }
+[data-motion="hype"] .ag-ambient::before{ animation-duration:6s; }
+[data-motion="hype"] .page-header .ag-shimmer{ animation-duration:4s; }
+[data-motion="hype"] .btn.ag-pulse::after{ animation-duration:1.8s; }
+[data-motion="hype"] .agogy-bar.ag-breathe{ animation-duration:6s; }
+
+/* Reduced motion respect */
+@media (prefers-reduced-motion:reduce){
+  html{ scroll-behavior:auto; }
+  .ag-shimmer,.ag-ambient,.ag-ambient::before,.btn.ag-pulse,.agogy-bar.ag-breathe{
+    animation:none !important; transition:none !important;
   }
 }
+
+/* =========================
+   IT Chefs Hero Logo + Halo + Crest
+   ========================= */
+
+.ag-logo{
+  display:block; margin:.75rem auto;
+  width:clamp(84px, 10vw, 140px); height:auto;
+  filter:drop-shadow(0 0 4px #d6b877) drop-shadow(0 0 10px #b6923e);
+  animation:agLogoGlow 3s ease-in-out infinite alternate, agLogoFloat 8s ease-in-out infinite;
+  opacity:0; transform:translateY(6px) scale(.98);
+  animation-delay:120ms; animation-fill-mode:forwards; z-index:1;
+}
+@keyframes agLogoGlow{
+  0%  { filter:drop-shadow(0 0 5px #d6b877) drop-shadow(0 0 10px #b6923e); transform:translateY(6px) scale(.98); opacity:0; }
+  50% { filter:drop-shadow(0 0 18px #ffd983) drop-shadow(0 0 28px #e6c879); transform:translateY(0) scale(1.02); opacity:.95; }
+  100%{ filter:drop-shadow(0 0 6px #d6b877)  drop-shadow(0 0 12px #b6923e); transform:translateY(2px) scale(1);   opacity:1; }
+}
+@keyframes agLogoFloat{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-5px) } }
+
+.ag-logo:hover{
+  transform:translateY(-2px) scale(1.06);
+  filter:drop-shadow(0 0 20px #f5d878) drop-shadow(0 0 30px #e6c879);
+  transition:transform .25s ease, filter .25s ease;
+}
+
+.ag-logo-wrap{ position:relative; display:inline-block; }
+.ag-logo{ position:relative; z-index:1; }
+
+/* Golden halo behind logo */
+.ag-logo-wrap::after{
+  content:"";
+  position:absolute; inset:-18% -22%;
+  border-radius:50%;
+  background:radial-gradient(ellipse at 50% 45%,
+              rgba(201,166,91,.35) 0%,
+              rgba(201,166,91,.12) 45%,
+              transparent 62%);
+  opacity:0; transform:scale(.94);
+  transition:opacity .6s ease, transform .8s ease, filter .6s ease;
+  filter:blur(18px);
+}
+[data-motion="hype"] .ag-logo-wrap::after{ opacity:.9;  transform:scale(1);   animation:haloPulse 4.8s ease-in-out infinite; }
+[data-motion="calm"] .ag-logo-wrap::after{ opacity:.4; transform:scale(.96); }
+
+@keyframes haloPulse{
+  0%  { opacity:.65; filter:blur(16px); }
+  50% { opacity:.98; filter:blur(24px); }
+  100%{ opacity:.65; filter:blur(16px); }
+}
+
+/* Optional Agogy crest badge */
+.ag-crest{
+  position:absolute; right:-10px; bottom:-10px;
+  width:clamp(20px,2.4vw,36px); height:auto;
+  opacity:.85; filter:drop-shadow(0 0 4px #b6923e);
+  transition:opacity .35s ease, transform .35s ease, filter .35s ease;
+}
+[data-motion="hype"] .ag-crest{ opacity:0; transform:translateY(4px) scale(.92); filter:drop-shadow(0 0 0 transparent); }
+[data-motion="calm"] .ag-crest{ opacity:.9; transform:translateY(0) scale(1); }
