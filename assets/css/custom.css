@@ -530,3 +530,73 @@ body::before{
   animation: agGutterFlow 18s ease-in-out infinite;
 }
 
+
+/* ===============================
+   Agogy Gold – Gutter Luminosity Pulse
+   (soft breathing glow; Showtime only)
+   =============================== */
+
+/* Make sure hero & content sit above the gutter layer */
+.page-header { position: relative; z-index: 1; }
+.main-content { position: relative; z-index: 1; }
+
+/* The breathing layer lives behind everything */
+body::before{
+  content:"";
+  position: fixed; inset: 0;
+  z-index: 0; pointer-events: none;
+
+  /* two-layer background: faint gold torch + chameleon sweep */
+  background:
+    radial-gradient(120% 90% at 50% -10%, rgba(255,220,140,.08), transparent 60%),
+    linear-gradient(
+      120deg,
+      rgba(4,97,159,.10),
+      rgba(6,190,182,.10),
+      rgba(98,54,255,.12),
+      rgba(201,166,91,.10),
+      rgba(4,97,159,.10)
+    );
+  background-size: 140% 140%, 500% 500%;
+  background-position: 50% 0, 0% 50%;
+
+  /* keep it subtle and blend with your charcoal */
+  mix-blend-mode: soft-light;
+  opacity: 0;                      /* off by default (Calm) */
+  transition: opacity .6s ease;
+
+  /* slow color drift; we’ll add the breath in hype mode */
+  animation: agGutterFlow 28s ease-in-out infinite;
+}
+
+/* Showtime: fade the layer in + add a gentle brightness breath */
+[data-motion="hype"] body::before{
+  opacity: .55;
+  animation:
+    agGutterFlow 28s ease-in-out infinite,
+    agGoldBreath 20s ease-in-out infinite;
+}
+
+/* Calm: no pulse */
+[data-motion="calm"] body::before{
+  opacity: 0;
+  animation: none;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  body::before{ animation: none !important; opacity: 0 !important; }
+}
+
+/* Keyframes */
+@keyframes agGutterFlow{
+  0%   { background-position: 50% 0,   0% 50%; }
+  50%  { background-position: 50% 0, 100% 50%; }
+  100% { background-position: 50% 0,   0% 50%; }
+}
+
+@keyframes agGoldBreath{
+  0%,100% { filter: brightness(1.00) saturate(1.00); }
+  50%     { filter: brightness(1.08) saturate(1.06); }
+}
+
