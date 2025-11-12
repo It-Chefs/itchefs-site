@@ -138,6 +138,45 @@ document.addEventListener('DOMContentLoaded', function () {
   if (prefersReduce) initial = 'calm';
   applyMode(initial);
 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var hero = document.querySelector('.page-header');
+  if (hero) {
+    var titleEl = hero.querySelector('.project-name') || hero;
+
+    // Avoid duplicates
+    if (!hero.querySelector('.ag-logo-wrap')) {
+      // Wrap for halo layer
+      var wrap = document.createElement('span');
+      wrap.className = 'ag-logo-wrap';
+
+      // Main hero logo
+      var img = document.createElement('img');
+      img.className = 'ag-logo';
+      img.src = "{{ '/assets/img/itchefs-mark.png' | relative_url }}";
+      img.alt = 'IT Chefs Logo';
+      img.decoding = 'async'; img.loading = 'eager';
+      wrap.appendChild(img);
+
+      // OPTIONAL crest badge (shows in Calm, fades in Showtime)
+      // Upload your crest at /assets/img/agogy-crest.png (gold coin / AG mark).
+      var crest = document.createElement('img');
+      crest.className = 'ag-crest';
+      crest.src = "{{ '/assets/img/agogy-crest.png' | relative_url }}";
+      crest.alt = 'Agogy Gold Crest';
+      crest.decoding = 'async'; crest.loading = 'lazy';
+      crest.onerror = function(){ crest.remove(); }; // safe if not present
+      wrap.appendChild(crest);
+
+      titleEl.insertAdjacentElement('afterend', wrap);
+    }
+  }
+
+  /* (unchanged) your applyMode() already sets data-motion to 'hype'/'calm' */
+});
+</script>
+
+  
  /* === IT Chefs Hero Logo (PNG under title) === */
 if (hero) {
   var titleEl = hero.querySelector('.project-name') || hero;
