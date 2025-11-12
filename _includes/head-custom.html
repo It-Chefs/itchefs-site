@@ -8,26 +8,91 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-  const hero = document.querySelector('.page-header');
-  if (!hero) return;
-  if (hero.querySelector('.ag-logo-wrap')) return; // avoid duplicates
+  // ===== Helper =====
+  var base = '{{ site.baseurl | default: "" }}';
 
-  const titleEl = hero.querySelector('.project-name') || hero;
+  // ===== Header polish (ambient + shimmer) =====
+  var hero = document.querySelector('.page-header');
+  if (hero) {
+    hero.classList.add('ag-ambient');
+    var name = hero.querySelector('.project-name');
+    var tag  = hero.querySelector('.project-tagline');
+    var brandHTML = 'IT&nbsp;Chefs<span class="tm">™</span>';
+    if (name) { name.innerHTML = brandHTML; name.classList.add('ag-shimmer'); }
+    if (tag)  { tag.classList.add('ag-shimmer'); }
+    try { document.title = 'IT Chefs — Where Automation Meets Art™'; } catch(e){}
+  }
 
-  const wrap = document.createElement('span');
-  wrap.className = 'ag-logo-wrap';
+  // ===== Showtime toggle (unchanged behavior) =====
+  var bar = document.querySelector('.agogy-bar');
+  var toggle = null, toggleLabel = null;
+  function applyMode(mode){
+    document.documentElement.setAttribute('data-motion', mode);
+    localStorage.setItem('agogy.motion', mode);
+    if (toggle) {
+      toggle.classList.toggle('on', mode === 'hype');
+      toggleLabel.textContent = 'Showtime: ' + (mode === 'hype' ? 'ON' : 'OFF');
+    }
+  }
+  if (bar) {
+    toggle = document.createElement('button');
+    toggle.className = 'ag-toggle';
+    toggle.setAttribute('type','button');
+    toggle.setAttribute('aria-label','Toggle Showtime animations');
+    toggle.innerHTML = '<span class="dot" aria-hidden="true"></span><span class="label">Showtime</span>';
+    toggleLabel = toggle.querySelector('.label');
+    bar.style.position = 'fixed';
+    bar.appendChild(toggle);
+    toggle.addEventListener('click', function(){
+      var current = document.documentElement.getAttribute('data-motion') || 'hype';
+      applyMode(current === 'hype' ? 'calm' : 'hype');
+    });
+    bar.classList.add('ag-breathe');
+  }
+  var prefersReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var saved  = localStorage.getItem('agogy.motion');
+  var initial = prefersReduce ? 'calm' : (saved || 'hype');
+  applyMode(initial);
 
-  const img = new Image();
-  img.className = 'ag-logo';
-  img.alt = 'IT Chefs Logo';
-  img.decoding = 'async';
-  img.loading  = 'eager';
-  // Known-good path when site source = /docs (cache-bust with ?v=3)
- img.src = "{{ '/assets/img/itchefs-mark.png?v=4' | relative_url }}";
+  // ===== Hero Logo (single source of truth) =====
+  if (hero) {
+    // Avoid duplicates
+    if (!hero.querySelector('.ag-logo-wrap')) {
+      var titleEl = hero.querySelector('.project-name') || hero;
 
+      var wrap = document.createElement('span');
+      wrap.className = 'ag-logo-wrap';
 
-  wrap.appendChild(img);
-  titleEl.insertAdjacentElement('afterend', wrap);
+      var img = document.createElement('img');
+      img.className = 'ag-logo';
+      // Primary path (docs is the Pages root, so assets resolve from /assets)
+      var primarySrc = base + '/assets/img/itchefs-mark.png';
+      // Fallback (only used if the primary truly 404s)
+      var fallbackSrc = base + '/docs/assets/img/itchefs-mark.png';
+      img.src = primarySrc + '?v=1';
+      img.alt = 'IT Chefs Logo';
+      img.decoding = 'async';
+      img.loading  = 'eager';
+      img.onerror = function () {
+        if (img.src.indexOf('itchefs-mark.png') !== -1 && img.src.indexOf('/docs/assets/') === -1) {
+          img.src = fallbackSrc + '?v=1';
+        }
+      };
+      wrap.appendChild(img);
+
+      // Optional crest (auto-removed if missing)
+      var crest = document.createElement('img');
+      crest.className = 'ag-crest';
+      crest.src = base + '/assets/img/agogy-crest.png';
+      crest.alt = 'Agogy Gold Crest';
+      crest.decoding = 'async';
+      crest.loading  = 'lazy';
+      crest.onerror = function(){ crest.remove(); };
+      wrap.appendChild(crest);
+
+      titleEl.insertAdjacentElement('afterend', wrap);
+    }
+  }
 });
 </script>
 
