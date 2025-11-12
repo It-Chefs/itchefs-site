@@ -6,7 +6,7 @@
 <!-- 🍯 Load Agogy Styles -->
 <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
 
-<!-- ⚙️ Agogy Injectors (footer, docs-nav, motion, brand, showtime + hero logo) -->
+<!-- ⚙️ Agogy Injectors (footer, nav, motion, hero logo) -->
 <script>
 document.addEventListener('DOMContentLoaded', function () {
   /* === Footer Injector === */
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
     `;
   }
 
-  /* === Top Navigation Injector (Docs-Friendly) === */
+  /* === Top Navigation (docs) === */
   var header = document.querySelector('.page-header');
   if (header) {
     var base = '{{ site.baseurl | default: "" }}';
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }).join('');
     header.insertAdjacentElement('beforebegin', nav);
 
-    // Active link highlight
+    // Active link
     var here = location.pathname;
     Array.from(nav.querySelectorAll('a')).forEach(function(a){
       try {
@@ -55,14 +55,13 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  /* === Motion Suite: ambient + shimmer + breathe + CTA pulse === */
+  /* === Motion Suite + Name === */
   var hero = document.querySelector('.page-header');
   if (hero) {
     hero.classList.add('ag-ambient');
     var name = hero.querySelector('.project-name');
     var tag  = hero.querySelector('.project-tagline');
 
-    // Brand Name Override → IT Chefs™
     var brandHTML = 'IT&nbsp;Chefs<span class="tm">™</span>';
     if (name) {
       name.innerHTML = brandHTML;
@@ -70,15 +69,14 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     if (tag) tag.classList.add('ag-shimmer');
 
-    // tab title
     try { document.title = 'IT Chefs — Where Automation Meets Art™'; } catch(e){}
   }
 
-  // Banner gentle breathe
+  // Banner breathe
   var bar = document.querySelector('.agogy-bar');
   if (bar) bar.classList.add('ag-breathe');
 
-  // CTA pulse (first .btn on page)
+  // CTA pulse
   var cta = document.querySelector('.btn');
   if (cta) cta.classList.add('ag-pulse');
 
@@ -100,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     localStorage.setItem('agogy.motion', mode);
 
-    // 🎨 Calm vs Showtime surface tweaks
+    // Calm vs Showtime surface tweaks
     if (mode === 'calm') {
       document.body.style.background = '#0C0E16';
       document.querySelectorAll('.ag-logo').forEach(i => {
@@ -128,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // pill toggle in the gold bar (top-right)
+  // Toggle pill in bar
   var toggle = null, toggleLabel = null;
   if (bar) {
     toggle = document.createElement('button');
@@ -153,13 +151,11 @@ document.addEventListener('DOMContentLoaded', function () {
   if (hero) {
     var titleEl = hero.querySelector('.project-name') || hero;
 
-    // Avoid duplicates
     if (!hero.querySelector('.ag-logo-wrap')) {
-      // Wrap for halo layer
       var wrap = document.createElement('span');
       wrap.className = 'ag-logo-wrap';
 
-      // Main hero logo (mark)
+      // Main mark
       var img = document.createElement('img');
       img.className = 'ag-logo';
       img.src = "{{ '/assets/img/itchefs-mark.png' | relative_url }}";
@@ -168,14 +164,14 @@ document.addEventListener('DOMContentLoaded', function () {
       img.loading  = 'eager';
       wrap.appendChild(img);
 
-      // OPTIONAL crest badge (shows in Calm, fades in Showtime)
+      // Optional crest (gold coin)
       var crest = document.createElement('img');
       crest.className = 'ag-crest';
       crest.src = "{{ '/assets/img/agogy-crest.png' | relative_url }}";
       crest.alt = 'Agogy Gold Crest';
       crest.decoding = 'async';
       crest.loading  = 'lazy';
-      crest.onerror = function(){ crest.remove(); }; // safe if not present
+      crest.onerror = function(){ crest.remove(); };
       crest.style.opacity = '1';
       crest.style.transition = 'opacity 0.6s ease-in-out';
       wrap.appendChild(crest);
@@ -185,4 +181,3 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 </script>
-
