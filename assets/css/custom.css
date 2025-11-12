@@ -10,6 +10,29 @@
 html, body { background: var(--charcoal); color: var(--warm-gray); }
 a, h1, h2, h3 { color: var(--agogy-gold); }
 
+/* ================================
+   Smooth Calm ⇄ Showtime Transitions
+   ================================ */
+
+html,
+body {
+  transition: background 0.6s ease, color 0.4s ease;
+}
+
+.page-header {
+  transition: background 0.6s ease, box-shadow 0.6s ease;
+}
+
+.ag-logo,
+.project-name {
+  transition:
+    filter 0.6s ease,
+    text-shadow 0.6s ease,
+    transform 0.6s ease,
+    opacity 0.6s ease;
+}
+
+
 /* =========================
    Fixed Gold Banner (top)
    ========================= */
