@@ -58,6 +58,44 @@ body {
   opacity: 0.95;
 }
 
+/* ================================
+   Title Shimmer (Showtime & Calm)
+   ================================ */
+
+@keyframes agTitleShimmer {
+  0% {
+    text-shadow:
+      0 0 4px rgba(201,166,91,0.5),
+      0 0 12px rgba(201,166,91,0.2);
+    letter-spacing: 0.02em;
+  }
+  40% {
+    text-shadow:
+      0 0 9px rgba(201,166,91,0.9),
+      0 0 18px rgba(255,228,150,0.35);
+    letter-spacing: 0.04em;
+  }
+  100% {
+    text-shadow:
+      0 0 5px rgba(201,166,91,0.6),
+      0 0 14px rgba(201,166,91,0.25);
+    letter-spacing: 0.02em;
+  }
+}
+
+/* Showtime: stronger, continuous shimmer */
+[data-motion="hype"] .project-name {
+  animation: agTitleShimmer 5.5s ease-in-out infinite;
+  color: var(--agogy-gold);
+}
+
+/* Calm: softer, slower shimmer pulse */
+[data-motion="calm"] .project-name {
+  animation: agTitleShimmer 10s ease-in-out infinite;
+  color: var(--agogy-gold);
+  opacity: 0.96;
+}
+
 
 /* =========================
    Fixed Gold Banner (top)
