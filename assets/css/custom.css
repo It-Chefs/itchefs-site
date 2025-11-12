@@ -320,3 +320,55 @@ body { padding-top: 45px; }
   filter: drop-shadow(0 0 20px #f5d878) drop-shadow(0 0 30px #e6c879);
   transition: transform .25s ease, filter .25s ease;
 }
+
+/* ===== IT Chefs – Hero Halo + Crest ===== */
+.ag-logo-wrap{position:relative;display:inline-block}
+.ag-logo{position:relative;z-index:1}
+
+/* Golden halo behind logo */
+.ag-logo-wrap::after{
+  content:"";
+  position:absolute; inset:-18% -22%;
+  border-radius:50%;
+  background: radial-gradient(ellipse at 50% 45%,
+              rgba(201,166,91,.35) 0%,
+              rgba(201,166,91,.12) 45%,
+              transparent 62%);
+  opacity:.0; transform:scale(.94);
+  transition: opacity .6s ease, transform .8s ease, filter .6s ease;
+  filter: blur(18px);
+}
+
+/* Showtime (hype): brighter, larger pulse */
+[data-motion="hype"] .ag-logo-wrap::after{
+  opacity:.9; transform:scale(1);
+  animation: haloPulse 4.8s ease-in-out infinite;
+}
+
+/* Calm: softer, smaller glow */
+[data-motion="calm"] .ag-logo-wrap::after{
+  opacity:.40; transform:scale(.96);
+}
+
+@keyframes haloPulse{
+  0%   { opacity:.65; filter:blur(16px) }
+  50%  { opacity:.98; filter:blur(24px) }
+  100% { opacity:.65; filter:blur(16px) }
+}
+
+/* Optional Agogy crest badge (shows in Calm, fades in Showtime) */
+.ag-crest{
+  position:absolute; right:-10px; bottom:-10px;
+  width:clamp(20px,2.4vw,36px); height:auto;
+  opacity:.85; filter:drop-shadow(0 0 4px #b6923e);
+  transition: opacity .35s ease, transform .35s ease, filter .35s ease;
+}
+
+[data-motion="hype"] .ag-crest{
+  opacity:0; transform:translateY(4px) scale(.92);
+  filter:drop-shadow(0 0 0 transparent);
+}
+
+[data-motion="calm"] .ag-crest{
+  opacity:.9; transform:translateY(0) scale(1);
+}
