@@ -6,12 +6,48 @@
 <!-- 🍯 Load Agogy Styles -->
 <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
 
+<!-- ⚙️ Agogy Injectors (footer, docs-nav, motion, brand, hero logo) -->
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-  // ===== Helper =====
+  // ===== helpers =====
   var base = '{{ site.baseurl | default: "" }}';
 
-  // ===== Header polish (ambient + shimmer) =====
+  // ===== footer =====
+  var f = document.querySelector('.site-footer');
+  if (f) {
+    f.innerHTML = '<div class="ag-footer">© ' + new Date().getFullYear() +
+      ' IT Chefs Studios — <strong>Agogy Gold Edition</strong> · ' +
+      '<a href="https://github.com/It-Chefs/itchefs-site">GitHub</a> · ' +
+      '<a href="https://github.com/It-Chefs/itchefs-site/blob/main/LICENSE">License</a></div>';
+  }
+
+  // ===== docs nav =====
+  var header = document.querySelector('.page-header');
+  if (header) {
+    var docsBase = base + '/docs';
+    var links = [
+      { href: docsBase + '/',            label: 'Home' },
+      { href: docsBase + '/kitchen/',    label: 'Briefs' },
+      { href: docsBase + '/automation/', label: 'Playbooks' },
+      { href: docsBase + '/branding/',   label: 'Branding' },
+      { href: docsBase + '/tests/',      label: 'Tests' }
+    ];
+    var nav = document.createElement('nav');
+    nav.className = 'ag-nav';
+    nav.setAttribute('aria-label','Primary');
+    nav.innerHTML = links.map(function(i){ return '<a href="'+i.href+'">'+i.label+'</a>'; }).join('');
+    header.insertAdjacentElement('beforebegin', nav);
+
+    var here = location.pathname;
+    Array.from(nav.querySelectorAll('a')).forEach(function(a){
+      try {
+        var ap = new URL(a.href, location.origin).pathname;
+        if (here === ap || (ap !== docsBase + '/' && here.startsWith(ap))) a.classList.add('active');
+      } catch(e){}
+    });
+  }
+
+  // ===== motion polish =====
   var hero = document.querySelector('.page-header');
   if (hero) {
     hero.classList.add('ag-ambient');
@@ -23,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
     try { document.title = 'IT Chefs — Where Automation Meets Art™'; } catch(e){}
   }
 
-  // ===== Showtime toggle (unchanged behavior) =====
+  // ===== showtime toggle =====
   var bar = document.querySelector('.agogy-bar');
   var toggle = null, toggleLabel = null;
   function applyMode(mode){
@@ -50,225 +86,30 @@ document.addEventListener('DOMContentLoaded', function () {
     bar.classList.add('ag-breathe');
   }
   var prefersReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var saved  = localStorage.getItem('agogy.motion');
-  var initial = prefersReduce ? 'calm' : (saved || 'hype');
-  applyMode(initial);
+  applyMode(prefersReduce ? 'calm' : (localStorage.getItem('agogy.motion') || 'hype'));
 
-  // ===== Hero Logo (single source of truth) =====
-  if (hero) {
-    // Avoid duplicates
-    if (!hero.querySelector('.ag-logo-wrap')) {
-      var titleEl = hero.querySelector('.project-name') || hero;
-
-      var wrap = document.createElement('span');
-      wrap.className = 'ag-logo-wrap';
-
-      var img = document.createElement('img');
-      img.className = 'ag-logo';
-      // Primary path (docs is the Pages root, so assets resolve from /assets)
-      var primarySrc = base + '/assets/img/itchefs-mark.png';
-      // Fallback (only used if the primary truly 404s)
-      var fallbackSrc = base + '/docs/assets/img/itchefs-mark.png';
-      img.src = primarySrc + '?v=1';
-      img.alt = 'IT Chefs Logo';
-      img.decoding = 'async';
-      img.loading  = 'eager';
-      img.onerror = function () {
-        if (img.src.indexOf('itchefs-mark.png') !== -1 && img.src.indexOf('/docs/assets/') === -1) {
-          img.src = fallbackSrc + '?v=1';
-        }
-      };
-      wrap.appendChild(img);
-
-      // Optional crest (auto-removed if missing)
-      var crest = document.createElement('img');
-      crest.className = 'ag-crest';
-      crest.src = base + '/assets/img/agogy-crest.png';
-      crest.alt = 'Agogy Gold Crest';
-      crest.decoding = 'async';
-      crest.loading  = 'lazy';
-      crest.onerror = function(){ crest.remove(); };
-      wrap.appendChild(crest);
-
-      titleEl.insertAdjacentElement('afterend', wrap);
-    }
-  }
-});
-</script>
-
-
-<!-- ⚙️ Agogy Injectors (footer, nav, motion, hero logo) -->
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  /* === Footer Injector === */
-  var f = document.querySelector('.site-footer');
-  if (f) {
-    f.innerHTML = `
-      <div class="ag-footer">
-        <span>© ${new Date().getFullYear()} IT Chefs Studios — <strong>Agogy Gold Edition</strong></span>
-        · <a href="https://github.com/It-Chefs/itchefs-site">GitHub</a>
-        · <a href="https://github.com/It-Chefs/itchefs-site/blob/main/LICENSE">License</a>
-      </div>
-    `;
-  }
-
-  /* === Top Navigation (docs) === */
-  var header = document.querySelector('.page-header');
-  if (header) {
-    var base = '{{ site.baseurl | default: "" }}';
-    var docsBase = base + '/docs';
-
-    var links = [
-      { href: docsBase + '/',            label: 'Home' },
-      { href: docsBase + '/kitchen/',    label: 'Briefs' },
-      { href: docsBase + '/automation/', label: 'Playbooks' },
-      { href: docsBase + '/branding/',   label: 'Branding' },
-      { href: docsBase + '/tests/',      label: 'Tests' }
-    ];
-
-    var nav = document.createElement('nav');
-    nav.className = 'ag-nav';
-    nav.setAttribute('aria-label','Primary');
-    nav.innerHTML = links.map(function (i) {
-      return '<a href="' + i.href + '">' + i.label + '</a>';
-    }).join('');
-    header.insertAdjacentElement('beforebegin', nav);
-
-    // Active link
-    var here = location.pathname;
-    Array.from(nav.querySelectorAll('a')).forEach(function(a){
-      try {
-        var ap = new URL(a.href, location.origin).pathname;
-        if (here === ap || (ap !== docsBase + '/' && here.startsWith(ap))) {
-          a.classList.add('active');
-        }
-      } catch(e) {}
-    });
-  }
-
-  /* === Motion Suite + Name === */
-  var hero = document.querySelector('.page-header');
-  if (hero) {
-    hero.classList.add('ag-ambient');
-    var name = hero.querySelector('.project-name');
-    var tag  = hero.querySelector('.project-tagline');
-
-    var brandHTML = 'IT&nbsp;Chefs<span class="tm">™</span>';
-    if (name) {
-      name.innerHTML = brandHTML;
-      name.classList.add('ag-shimmer');
-    }
-    if (tag) tag.classList.add('ag-shimmer');
-
-    try { document.title = 'IT Chefs — Where Automation Meets Art™'; } catch(e){}
-  }
-
-  // Banner breathe
-  var bar = document.querySelector('.agogy-bar');
-  if (bar) bar.classList.add('ag-breathe');
-
-  // CTA pulse
-  var cta = document.querySelector('.btn');
-  if (cta) cta.classList.add('ag-pulse');
-
-  /* === Showtime Toggle (Calm ⇄ Hype) === */
-  function getQueryMode() {
-    var m = new URLSearchParams(location.search).get('mode');
-    return m && (m === 'hype' || m === 'calm') ? m : null;
-  }
-  var prefersReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var saved  = localStorage.getItem('agogy.motion');
-  var qmode  = getQueryMode();
-  var initial = prefersReduce ? 'calm' : (qmode || saved || 'hype');
-
-  function applyMode(mode){
-    document.documentElement.setAttribute('data-motion', mode);
-    if (toggle) {
-      toggle.classList.toggle('on', mode === 'hype');
-      toggleLabel.textContent = 'Showtime: ' + (mode === 'hype' ? 'ON' : 'OFF');
-    }
-    localStorage.setItem('agogy.motion', mode);
-
-    // Calm vs Showtime surface tweaks
-    if (mode === 'calm') {
-      document.body.style.background = '#0C0E16';
-      document.querySelectorAll('.ag-logo').forEach(i => {
-        i.style.filter = 'drop-shadow(0 0 2px #6E5C2E)';
-      });
-      document.querySelectorAll('.project-name').forEach(t => {
-        t.style.textShadow = '0 0 2px #A98E4E';
-      });
-      document.querySelectorAll('.ag-crest').forEach(c => {
-        c.style.opacity = '1';
-        c.style.transition = 'opacity 0.6s ease-in-out';
-      });
-    } else {
-      document.body.style.background = 'linear-gradient(90deg,#00C9A7 0%,#6B63FF 100%)';
-      document.querySelectorAll('.ag-logo').forEach(i => {
-        i.style.filter = 'drop-shadow(0 0 8px #C9A65B)';
-      });
-      document.querySelectorAll('.project-name').forEach(t => {
-        t.style.textShadow = '0 0 8px #C9A65B';
-      });
-      document.querySelectorAll('.ag-crest').forEach(c => {
-        c.style.opacity = '0';
-        c.style.transition = 'opacity 0.6s ease-in-out';
-      });
-    }
-  }
-
-  // Toggle pill in bar
-  var toggle = null, toggleLabel = null;
-  if (bar) {
-    toggle = document.createElement('button');
-    toggle.className = 'ag-toggle';
-    toggle.setAttribute('type','button');
-    toggle.setAttribute('aria-label','Toggle Showtime animations');
-    toggle.innerHTML = '<span class="dot" aria-hidden="true"></span><span class="label">Showtime</span>';
-    toggleLabel = toggle.querySelector('.label');
-    bar.style.position = 'fixed';
-    bar.appendChild(toggle);
-    toggle.addEventListener('click', function(){
-      var current = document.documentElement.getAttribute('data-motion') || 'hype';
-      var next = current === 'hype' ? 'calm' : 'hype';
-      applyMode(next);
-    });
-  }
-
-  if (prefersReduce) initial = 'calm';
-  applyMode(initial);
-
-  /* === Hero Logo + Crest (single source of truth) === */
-  if (hero) {
+  // ===== hero logo (single source of truth; same path as when it worked) =====
+  if (hero && !hero.querySelector('.ag-logo')) {
     var titleEl = hero.querySelector('.project-name') || hero;
+    var img = document.createElement('img');
+    img.className = 'ag-logo';
+    img.alt = 'IT Chefs Logo';
+    img.decoding = 'async';
+    img.loading  = 'eager';
 
-    if (!hero.querySelector('.ag-logo-wrap')) {
-      var wrap = document.createElement('span');
-      wrap.className = 'ag-logo-wrap';
+    // This path is correct when the file lives at: docs/assets/img/itchefs-mark.png
+    img.src = "{{ '/assets/img/itchefs-mark.png' | relative_url }}";
 
-      // Main mark
-      var img = document.createElement('img');
-      img.className = 'ag-logo';
-      img.src = "{{ '/docs/assets/img/itchefs-mark.png' | relative_url }}";
-      img.alt = 'IT Chefs Logo';
-      img.decoding = 'async';
-      img.loading  = 'eager';
-      wrap.appendChild(img);
+    // tiny belt-and-suspenders: if primary ever fails, try docs/ variant once
+    var triedFallback = false;
+    img.onerror = function(){
+      if (!triedFallback) {
+        triedFallback = true;
+        img.src = base + '/docs/assets/img/itchefs-mark.png';
+      }
+    };
 
-      // Optional crest (gold coin)
-      var crest = document.createElement('img');
-      crest.className = 'ag-crest';
-      crest.src = "{{ '/assets/img/agogy-crest.png' | relative_url }}";
-      crest.alt = 'Agogy Gold Crest';
-      crest.decoding = 'async';
-      crest.loading  = 'lazy';
-      crest.onerror = function(){ crest.remove(); };
-      crest.style.opacity = '1';
-      crest.style.transition = 'opacity 0.6s ease-in-out';
-      wrap.appendChild(crest);
-
-      titleEl.insertAdjacentElement('afterend', wrap);
-    }
+    titleEl.insertAdjacentElement('afterend', img);
   }
 });
 </script>
