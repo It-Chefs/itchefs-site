@@ -28,11 +28,11 @@ document.addEventListener('DOMContentLoaded', function () {
     var docsBase = base + '/docs';
 
     var links = [
-      { href: docsBase + '/',              label: 'Home' },
-      { href: docsBase + '/kitchen/',      label: 'Briefs' },
-      { href: docsBase + '/automation/',   label: 'Playbooks' },
-      { href: docsBase + '/branding/',     label: 'Branding' },
-      { href: docsBase + '/tests/',        label: 'Tests' }
+      { href: docsBase + '/',            label: 'Home' },
+      { href: docsBase + '/kitchen/',    label: 'Briefs' },
+      { href: docsBase + '/automation/', label: 'Playbooks' },
+      { href: docsBase + '/branding/',   label: 'Branding' },
+      { href: docsBase + '/tests/',      label: 'Tests' }
     ];
 
     var nav = document.createElement('nav');
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var name = hero.querySelector('.project-name');
     var tag  = hero.querySelector('.project-tagline');
 
-    /* === Brand Name Override → IT Chefs™ (no emoji) === */
+    // Brand Name Override → IT Chefs™
     var brandHTML = 'IT&nbsp;Chefs<span class="tm">™</span>';
     if (name) {
       name.innerHTML = brandHTML;
@@ -88,8 +88,8 @@ document.addEventListener('DOMContentLoaded', function () {
     return m && (m === 'hype' || m === 'calm') ? m : null;
   }
   var prefersReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var saved = localStorage.getItem('agogy.motion');
-  var qmode = getQueryMode();
+  var saved  = localStorage.getItem('agogy.motion');
+  var qmode  = getQueryMode();
   var initial = prefersReduce ? 'calm' : (qmode || saved || 'hype');
 
   function applyMode(mode){
@@ -99,22 +99,33 @@ document.addEventListener('DOMContentLoaded', function () {
       toggleLabel.textContent = 'Showtime: ' + (mode === 'hype' ? 'ON' : 'OFF');
     }
     localStorage.setItem('agogy.motion', mode);
-      // 🎨 Agogy Calm vs Showtime Mode Styles
-  if (mode === 'calm') {
-    document.body.style.background = '#0C0E16';
-    document.querySelectorAll('.ag-logo').forEach(i => {
-      i.style.filter = 'drop-shadow(0 0 2px #6E5C2E)';
-    });
-   
-  } else {
-    document.body.style.background = 'linear-gradient(90deg,#00C9A7 0%,#6B63FF 100%)';
-    document.querySelectorAll('.ag-logo').forEach(i => {
-      i.style.filter = 'drop-shadow(0 0 8px #C9A65B)';
-    });
-    document.querySelectorAll('.project-name').forEach(t => {
-      t.style.textShadow = '0 0 8px #C9A65B';
-    });
-  }
+
+    // 🎨 Calm vs Showtime surface tweaks
+    if (mode === 'calm') {
+      document.body.style.background = '#0C0E16';
+      document.querySelectorAll('.ag-logo').forEach(i => {
+        i.style.filter = 'drop-shadow(0 0 2px #6E5C2E)';
+      });
+      document.querySelectorAll('.project-name').forEach(t => {
+        t.style.textShadow = '0 0 2px #A98E4E';
+      });
+      document.querySelectorAll('.ag-crest').forEach(c => {
+        c.style.opacity = '1';
+        c.style.transition = 'opacity 0.6s ease-in-out';
+      });
+    } else {
+      document.body.style.background = 'linear-gradient(90deg,#00C9A7 0%,#6B63FF 100%)';
+      document.querySelectorAll('.ag-logo').forEach(i => {
+        i.style.filter = 'drop-shadow(0 0 8px #C9A65B)';
+      });
+      document.querySelectorAll('.project-name').forEach(t => {
+        t.style.textShadow = '0 0 8px #C9A65B';
+      });
+      document.querySelectorAll('.ag-crest').forEach(c => {
+        c.style.opacity = '0';
+        c.style.transition = 'opacity 0.6s ease-in-out';
+      });
+    }
   }
 
   // pill toggle in the gold bar (top-right)
@@ -138,9 +149,7 @@ document.addEventListener('DOMContentLoaded', function () {
   if (prefersReduce) initial = 'calm';
   applyMode(initial);
 
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  var hero = document.querySelector('.page-header');
+  /* === Hero Logo + Crest (single source of truth) === */
   if (hero) {
     var titleEl = hero.querySelector('.project-name') || hero;
 
@@ -150,46 +159,30 @@ document.addEventListener('DOMContentLoaded', function () {
       var wrap = document.createElement('span');
       wrap.className = 'ag-logo-wrap';
 
-      // Main hero logo
+      // Main hero logo (mark)
       var img = document.createElement('img');
       img.className = 'ag-logo';
       img.src = "{{ '/assets/img/itchefs-mark.png' | relative_url }}";
       img.alt = 'IT Chefs Logo';
-      img.decoding = 'async'; img.loading = 'eager';
+      img.decoding = 'async';
+      img.loading  = 'eager';
       wrap.appendChild(img);
 
       // OPTIONAL crest badge (shows in Calm, fades in Showtime)
-      // Upload your crest at /assets/img/agogy-crest.png (gold coin / AG mark).
       var crest = document.createElement('img');
       crest.className = 'ag-crest';
       crest.src = "{{ '/assets/img/agogy-crest.png' | relative_url }}";
       crest.alt = 'Agogy Gold Crest';
-      crest.decoding = 'async'; crest.loading = 'lazy';
+      crest.decoding = 'async';
+      crest.loading  = 'lazy';
       crest.onerror = function(){ crest.remove(); }; // safe if not present
+      crest.style.opacity = '1';
+      crest.style.transition = 'opacity 0.6s ease-in-out';
       wrap.appendChild(crest);
 
       titleEl.insertAdjacentElement('afterend', wrap);
     }
   }
-
-  /* (unchanged) your applyMode() already sets data-motion to 'hype'/'calm' */
 });
 </script>
 
-  
- /* === IT Chefs Hero Logo (PNG under title) === */
-if (hero) {
-  var titleEl = hero.querySelector('.project-name') || hero;
-  if (!hero.querySelector('.ag-logo')) {
-    var logoSrc = "{{ '/assets/img/itchefs-logo-gold.png' | relative_url }}";
-    var img = document.createElement('img');
-    img.className = 'ag-logo';
-    img.src = logoSrc;
-    img.alt = 'IT Chefs Logo';
-    img.decoding = 'async';
-    img.loading = 'eager';
-    titleEl.insertAdjacentElement('afterend', img);
-  }
-}
-});
-</script>
