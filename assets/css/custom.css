@@ -469,3 +469,64 @@ body::before {
   pointer-events:none;
   z-index:0;
 }
+
+
+/* ================================
+   Gutter “Breath” – stronger & clearer
+   (drop-in booster; keep your existing code)
+   ================================ */
+
+:root{
+  /* raise/lower overall gutter intensity here */
+  --ag-gutter-strength: .34;  /* was ~.22 in earlier pass */
+}
+
+/* keep body transparent so our fixed layer shows */
+body{ background: transparent; position: relative; z-index: 0; }
+
+/* beefed-up fixed background layer */
+body::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  /* three layers: side glows + base chroma gradient */
+  background:
+    radial-gradient(900px 900px at -6% 50%,
+      rgba(6,190,182,var(--ag-gutter-strength)), transparent 62%),
+    radial-gradient(900px 900px at 106% 50%,
+      rgba(98,54,255,var(--ag-gutter-strength)), transparent 62%),
+    linear-gradient(120deg,
+      rgba(4,97,159,var(--ag-gutter-strength))   0%,
+      rgba(6,190,182,var(--ag-gutter-strength))  22%,
+      rgba(98,54,255,calc(var(--ag-gutter-strength)+.06)) 60%,
+      rgba(201,166,91,var(--ag-gutter-strength)) 85%,
+      rgba(4,97,159,var(--ag-gutter-strength))   100%
+    );
+  background-size: 100% 100%, 100% 100%, 600% 600%;
+  filter: saturate(1.08);
+  opacity: 0;                       /* calm */
+  transition: opacity .6s ease;
+}
+
+/* calm keeps charcoal with a faint top glow so it isn’t flat black */
+[data-motion="calm"] html{
+  background:
+    radial-gradient(1100px 520px at 50% -8%, rgba(201,166,91,.08), transparent 60%),
+    #0C0E16;
+}
+[data-motion="calm"] body::before{ opacity: 0; }
+
+/* hype animates the base chroma; side glows are static for elegance */
+@keyframes agGutterFlow {
+  0%   { background-position: 0 0, 0 0,   0% 50%; }
+  50%  { background-position: 0 0, 0 0, 100% 50%; }
+  100% { background-position: 0 0, 0 0,   0% 50%; }
+}
+[data-motion="hype"] body::before{
+  opacity: 1;
+  animation: agGutterFlow 18s ease-in-out infinite;
+}
+
