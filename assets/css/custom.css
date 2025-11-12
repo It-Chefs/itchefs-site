@@ -1,51 +1,41 @@
-/* =========================
-   Agogy Gold – Global Base
-   ========================= */
+/* =========================================================
+   Agogy Gold • IT Chefs — Full Polished Theme (ONE FILE)
+   ========================================================= */
 
+/* ---------- Tokens ---------- */
 :root{
   --agogy-gold:#C9A65B;
-  --charcoal:#1A1A1A;
+  --charcoal:#0C0E16;
+  --charcoal-2:#121212;
+  --ink:#0f0f0f;
   --warm-gray:#D3D3D3;
 }
 
-html,body{
-  background:var(--charcoal);
-  color:var(--warm-gray);
-  transition:background .6s ease,color .4s ease;
+/* ---------- Global Base ---------- */
+html, body{
+  background: var(--charcoal);
+  color: var(--warm-gray);
+  transition: background .6s ease, color .4s ease;
 }
 
-a,h1,h2,h3{ color:var(--agogy-gold); }
+a, h1, h2, h3{ color: var(--agogy-gold); }
 
-/* ================================
-   Calm ⇄ Showtime Transitions
-   ================================ */
-
-.page-header{ transition:background .6s ease, box-shadow .6s ease; }
-
-.ag-logo,.project-name{
-  transition:
-    filter .6s ease,
-    text-shadow .6s ease,
-    transform .6s ease,
-    opacity .6s ease;
+/* ---------- Calm ⇄ Showtime Transitions ---------- */
+.page-header{ transition: background .6s ease, box-shadow .6s ease; }
+.ag-logo,
+.project-name{
+  transition: filter .6s ease, text-shadow .6s ease, transform .6s ease, opacity .6s ease;
 }
 
-/* ================================
-   Logo Breathing Animation
-   ================================ */
-
+/* ---------- Logo Breathing ---------- */
 @keyframes agBreath{
   0%,100%{ transform:scale(1);   filter:drop-shadow(0 0 4px rgba(201,166,91,.5)); }
   50%    { transform:scale(1.06);filter:drop-shadow(0 0 10px rgba(201,166,91,.9)); }
 }
-
 [data-motion="hype"] .ag-logo{ animation:agBreath 6s ease-in-out infinite; }
 [data-motion="calm"] .ag-logo{ animation:agBreath 10s ease-in-out infinite; opacity:.95; }
 
-/* ================================
-   Title Shimmer (Showtime & Calm)
-   ================================ */
-
+/* ---------- Title Shimmer ---------- */
 @keyframes agTitleShimmer{
   0%{
     text-shadow:0 0 4px rgba(201,166,91,.5),0 0 12px rgba(201,166,91,.2);
@@ -60,53 +50,32 @@ a,h1,h2,h3{ color:var(--agogy-gold); }
     letter-spacing:.02em;
   }
 }
+[data-motion="hype"] .project-name{ animation:agTitleShimmer 5.5s ease-in-out infinite; color:var(--agogy-gold); }
+[data-motion="calm"] .project-name{ animation:agTitleShimmer 10s ease-in-out infinite; color:var(--agogy-gold); opacity:.96; }
 
-[data-motion="hype"] .project-name{
-  animation:agTitleShimmer 5.5s ease-in-out infinite;
-  color:var(--agogy-gold);
-}
-[data-motion="calm"] .project-name{
-  animation:agTitleShimmer 10s ease-in-out infinite;
-  color:var(--agogy-gold);
-  opacity:.96;
-}
-
-/* =========================
-   Fixed Gold Banner (top)
-   ========================= */
-
+/* ---------- Fixed Gold Banner ---------- */
 .agogy-bar{
   position:fixed; top:0; left:0; width:100%; z-index:999;
   background:linear-gradient(90deg,#C9A65B,#D8B978 40%,#C9A65B);
   color:#111;
   font-family:Poppins,Inter,system-ui,sans-serif;
-  font-weight:600; text-align:center;
-  padding:10px 0; letter-spacing:.4px;
-  border-bottom:1px solid rgba(0,0,0,.25);
-  box-shadow:0 2px 10px rgba(0,0,0,.25);
+  font-weight:600; text-align:center; padding:10px 0; letter-spacing:.4px;
+  border-bottom:1px solid rgba(0,0,0,.25); box-shadow:0 2px 10px rgba(0,0,0,.25);
 }
 .agogy-bar.ag-breathe{ animation:agBreathe 9s ease-in-out infinite; }
+@keyframes agBreathe{ 0%,100%{filter:brightness(1)} 50%{filter:brightness(1.06)} }
+body{ padding-top:45px; }
 
-@keyframes agBreathe{ 0%,100%{ filter:brightness(1) } 50%{ filter:brightness(1.06) } }
-
-body{ padding-top:45px; } /* keep content clear of banner */
-
-/* =========================
-   Docs-Friendly Top Nav
-   ========================= */
-
+/* ---------- Docs Top Nav ---------- */
 .ag-nav{
   position:sticky; top:45px; z-index:998;
   display:flex; gap:16px; justify-content:center; align-items:center;
-  padding:10px 16px;
-  background:rgba(15,15,15,.92);
-  backdrop-filter:blur(6px);
-  border-bottom:1px solid rgba(255,255,255,.08);
+  padding:10px 16px; background:rgba(15,15,15,.92);
+  backdrop-filter:blur(6px); border-bottom:1px solid rgba(255,255,255,.08);
 }
 .ag-nav a{
   color:#d8d8d8; text-decoration:none;
-  padding:6px 12px; border-radius:10px;
-  border:1px solid transparent;
+  padding:6px 12px; border-radius:10px; border:1px solid transparent;
   transition:filter .2s ease, border-color .2s ease, background .2s ease;
   white-space:nowrap;
 }
@@ -114,24 +83,19 @@ body{ padding-top:45px; } /* keep content clear of banner */
 .ag-nav a.active{
   color:#111;
   background:linear-gradient(90deg,#C9A65B,#D8B978 60%,#C9A65B);
-  border-color:transparent; font-weight:600;
-  box-shadow:0 2px 10px rgba(0,0,0,.25);
+  border-color:transparent; font-weight:600; box-shadow:0 2px 10px rgba(0,0,0,.25);
 }
-@media (max-width:520px){
-  .ag-nav{ overflow-x:auto; justify-content:flex-start; }
-}
+@media (max-width:520px){ .ag-nav{ overflow-x:auto; justify-content:flex-start; } }
 
-/* =========================
-   Content & Footer Polish
-   ========================= */
-
+/* ---------- Content & Footer ---------- */
 .main-content{
-  background:#121212; color:var(--warm-gray);
+  background: var(--charcoal-2);
+  color: var(--warm-gray);
   border-top:1px solid rgba(255,255,255,.08);
   padding:40px 24px;
-  position:relative; z-index:1; /* sits above hero bleed */
+  position:relative; z-index:1;
 }
-.site-footer{ background:#0f0f0f; color:#bbb; border-top:1px solid rgba(255,255,255,.08); }
+.site-footer{ background:var(--ink); color:#bbb; border-top:1px solid rgba(255,255,255,.08); }
 .ag-footer{
   display:flex; justify-content:center; align-items:center; gap:12px;
   padding:16px 12px; font:500 14px/1.4 Inter,system-ui,sans-serif;
@@ -140,11 +104,8 @@ body{ padding-top:45px; } /* keep content clear of banner */
 .ag-footer a:hover{ border-color:currentColor; }
 .ag-footer strong{ color:var(--agogy-gold); }
 
-/* =========================
-   Hero / Project Title
-   ========================= */
-
-.page-header{ position:relative; }
+/* ---------- Hero / Title ---------- */
+.page-header{ position:relative; overflow:hidden; }
 .page-header .project-name{ letter-spacing:.5px; }
 .page-header .project-name,
 .page-header .project-tagline{ text-shadow:0 2px 8px rgba(0,0,0,.25); }
@@ -155,10 +116,8 @@ body{ padding-top:45px; } /* keep content clear of banner */
     linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.35) 12%, rgba(255,255,255,0) 24%),
     linear-gradient(90deg,#FFD77B,#C9A65B);
   background-size:220% 100%, 100% 100%;
-  background-repeat:no-repeat;
-  background-position:-120% 0, 0 0;
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+  background-repeat:no-repeat; background-position:-120% 0, 0 0;
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
   animation:agTextShimmer 6.5s ease-in-out infinite;
 }
 @keyframes agTextShimmer{
@@ -166,248 +125,179 @@ body{ padding-top:45px; } /* keep content clear of banner */
   46% { background-position: 120% 0, 0 0; filter:drop-shadow(0 2px 8px rgba(0,0,0,.35)); }
   100%{ background-position: 120% 0, 0 0; filter:drop-shadow(0 2px 6px rgba(0,0,0,.25)); }
 }
-.project-name .tm{
-  font-size:.5em; vertical-align:super; margin-left:2px;
-  color:var(--agogy-gold); text-shadow:0 1px 3px rgba(0,0,0,.3);
-}
+.project-name .tm{ font-size:.5em; vertical-align:super; margin-left:2px; color:var(--agogy-gold); text-shadow:0 1px 3px rgba(0,0,0,.3); }
 
-/* =========================
-   Royal Chameleon Hero Flow
-   ========================= */
-
+/* ---------- Royal Chameleon Hero Flow ---------- */
 .ag-ambient{
-  position:relative; overflow:hidden;
-  background:linear-gradient(120deg,#04619f,#06beb6,#6236ff,#C9A65B,#04619f);
-  background-size:500% 500%;
-  animation:agChameleon 18s ease-in-out infinite;
+  background: linear-gradient(120deg,#04619f,#06beb6,#6236ff,#C9A65B,#04619f);
+  background-size: 500% 500%;
+  animation: agChameleon 18s ease-in-out infinite;
 }
 @keyframes agChameleon{
-  0%{ background-position:0% 50%; }
-  25%{ background-position:50% 100%; }
-  50%{ background-position:100% 50%; }
-  75%{ background-position:50% 0%; }
-  100%{ background-position:0% 50%; }
+  0%{background-position:0% 50%} 25%{background-position:50% 100%}
+  50%{background-position:100% 50%} 75%{background-position:50% 0%}
+  100%{background-position:0% 50%}
 }
 
-/* Floating shimmer overlay for depth */
+/* Floating shimmer overlay */
 .ag-ambient::before{
   content:""; position:absolute; inset:0;
   background:
     radial-gradient(circle at 30% 40%, rgba(255,255,255,.07), transparent 65%),
     radial-gradient(circle at 70% 60%, rgba(98,54,255,.15), transparent 70%);
-  mix-blend-mode:overlay; pointer-events:none;
-  animation:agAuroraShimmer 10s ease-in-out infinite alternate;
+  mix-blend-mode: overlay; pointer-events:none;
+  animation: agAuroraShimmer 10s ease-in-out infinite alternate;
 }
 @keyframes agAuroraShimmer{
-  0%  { transform:translate(0,0) scale(1);   opacity:.7; }
-  50% { transform:translate(-6%,5%) scale(1.05); opacity:1; }
-  100%{ transform:translate(8%,-5%) scale(1);  opacity:.8; }
+  0%{transform:translate(0,0) scale(1); opacity:.7}
+  50%{transform:translate(-6%,5%) scale(1.05); opacity:1}
+  100%{transform:translate(8%,-5%) scale(1); opacity:.8}
 }
 
-/* === Gradient bleed under hero so side gutters aren't black === */
+/* Strong gradient bleed below hero so gutters carry the color */
 .page-header::after{
   content:"";
-  position:absolute;
-  left:50%; transform:translateX(-50%);
-  bottom:-42px;
-  width:100vw; height:96px;
-  background:inherit; /* reuse animated gradient */
-  opacity:.85;
-  filter:blur(26px) saturate(1.05);
-  pointer-events:none;
-  z-index:0;
+  position:absolute; left:50%; transform:translateX(-50%);
+  bottom:-56px; width:100vw; height:220px;
+  background:inherit; opacity:1; filter:blur(34px) saturate(1.06);
+  pointer-events:none; z-index:0;
+  -webkit-mask-image:linear-gradient(to bottom, rgba(0,0,0,.95), rgba(0,0,0,0) 72%);
+          mask-image:linear-gradient(to bottom, rgba(0,0,0,.95), rgba(0,0,0,0) 72%);
 }
 
-/* =========================
-   CTA: Gold Button + Pulse
-   ========================= */
-
+/* ---------- Buttons (Gold) ---------- */
 .btn{
-  background:#C9A65B !important;
-  border-color:rgba(0,0,0,.15) !important;
-  color:#111 !important;
-  box-shadow:0 2px 10px rgba(0,0,0,.25);
+  background:#C9A65B !important; border-color:rgba(0,0,0,.15) !important;
+  color:#111 !important; box-shadow:0 2px 10px rgba(0,0,0,.25);
 }
-.btn:focus,.btn:hover{ filter:brightness(1.08); box-shadow:0 4px 16px rgba(0,0,0,.35); }
+.btn:focus, .btn:hover{ filter:brightness(1.08); box-shadow:0 4px 16px rgba(0,0,0,.35); }
 .btn.ag-pulse{ position:relative; isolation:isolate; }
 .btn.ag-pulse::after{
   content:""; position:absolute; inset:-6px; border-radius:12px;
   box-shadow:0 0 0 0 rgba(201,166,91,.45);
-  animation:agPulse 2.6s ease-out infinite; z-index:-1;
+  animation: agPulse 2.6s ease-out infinite; z-index:-1;
 }
 @keyframes agPulse{
-  0%  { opacity:.8; box-shadow:0 0 0 0 rgba(201,166,91,.45); }
-  70% { opacity:0;  box-shadow:0 0 0 22px rgba(201,166,91,0); }
-  100%{ opacity:0;  box-shadow:0 0 0 22px rgba(201,166,91,0); }
+  0%{opacity:.8; box-shadow:0 0 0 0 rgba(201,166,91,.45)}
+  70%{opacity:0;  box-shadow:0 0 0 22px rgba(201,166,91,0)}
+  100%{opacity:0; box-shadow:0 0 0 22px rgba(201,166,91,0)}
 }
 
-/* =========================
-   Showtime Toggle
-   ========================= */
-
+/* ---------- Showtime Toggle ---------- */
 .ag-toggle{
   position:absolute; right:10px; top:6px;
   display:inline-flex; align-items:center; gap:8px;
   padding:6px 10px; border-radius:999px;
   background:rgba(0,0,0,.25); color:#111; font:600 12px/1 Inter,system-ui,sans-serif;
   border:1px solid rgba(0,0,0,.2);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.35), 0 2px 6px rgba(0,0,0,.15);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 2px 6px rgba(0,0,0,.15);
   cursor:pointer; user-select:none;
 }
-.ag-toggle .dot{
-  width:10px; height:10px; border-radius:50%;
-  background:#3a3a3a; box-shadow:inset 0 0 0 2px rgba(0,0,0,.25);
-}
+.ag-toggle .dot{ width:10px; height:10px; border-radius:50%; background:#3a3a3a; box-shadow:inset 0 0 0 2px rgba(0,0,0,.25); }
 .ag-toggle.on{ background:rgba(255,255,255,.75); }
 .ag-toggle.on .dot{ background:var(--agogy-gold); }
 
-/* Motion speed accents */
+/* Motion accents */
 [data-motion="calm"] .ag-shimmer,
 [data-motion="calm"] .ag-ambient::before,
 [data-motion="calm"] .btn.ag-pulse,
-[data-motion="calm"] .agogy-bar.ag-breathe{
-  animation:none !important; transition:none !important;
-}
+[data-motion="calm"] .agogy-bar.ag-breathe{ animation:none !important; transition:none !important; }
 [data-motion="hype"] .ag-ambient{ animation-duration:9s; }
 [data-motion="hype"] .ag-ambient::before{ animation-duration:6s; }
 [data-motion="hype"] .page-header .ag-shimmer{ animation-duration:4s; }
 [data-motion="hype"] .btn.ag-pulse::after{ animation-duration:1.8s; }
 [data-motion="hype"] .agogy-bar.ag-breathe{ animation-duration:6s; }
 
-/* Reduced motion respect */
+/* Reduced motion */
 @media (prefers-reduced-motion:reduce){
   html{ scroll-behavior:auto; }
-  .ag-shimmer,.ag-ambient,.ag-ambient::before,.btn.ag-pulse,.agogy-bar.ag-breathe{
+  .ag-shimmer, .ag-ambient, .ag-ambient::before, .btn.ag-pulse, .agogy-bar.ag-breathe{
     animation:none !important; transition:none !important;
   }
 }
 
-/* =========================
-   IT Chefs Hero Logo + Halo + Crest
-   ========================= */
-
+/* ---------- IT Chefs Logo + Halo + Crest ---------- */
 .ag-logo{
   display:block; margin:.75rem auto;
-  width:clamp(84px, 10vw, 140px); height:auto;
-  filter:drop-shadow(0 0 4px #d6b877) drop-shadow(0 0 10px #b6923e);
-  animation:agLogoGlow 3s ease-in-out infinite alternate, agLogoFloat 8s ease-in-out infinite;
+  width: clamp(84px,10vw,140px); height:auto;
+  filter: drop-shadow(0 0 4px #d6b877) drop-shadow(0 0 10px #b6923e);
+  animation: agLogoGlow 3s ease-in-out infinite alternate, agLogoFloat 8s ease-in-out infinite;
   opacity:0; transform:translateY(6px) scale(.98);
   animation-delay:120ms; animation-fill-mode:forwards; z-index:1;
 }
 @keyframes agLogoGlow{
   0%  { filter:drop-shadow(0 0 5px #d6b877) drop-shadow(0 0 10px #b6923e); transform:translateY(6px) scale(.98); opacity:0; }
   50% { filter:drop-shadow(0 0 18px #ffd983) drop-shadow(0 0 28px #e6c879); transform:translateY(0) scale(1.02); opacity:.95; }
-  100%{ filter:drop-shadow(0 0 6px #d6b877)  drop-shadow(0 0 12px #b6923e); transform:translateY(2px) scale(1);   opacity:1; }
+  100%{ filter:drop-shadow(0 0 6px #d6b877)  drop-shadow(0 0 12px #b6923e); transform:translateY(2px) scale(1); opacity:1; }
 }
-@keyframes agLogoFloat{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-5px) } }
-
-.ag-logo:hover{
-  transform:translateY(-2px) scale(1.06);
-  filter:drop-shadow(0 0 20px #f5d878) drop-shadow(0 0 30px #e6c879);
-  transition:transform .25s ease, filter .25s ease;
-}
+@keyframes agLogoFloat{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
+.ag-logo:hover{ transform:translateY(-2px) scale(1.06); filter:drop-shadow(0 0 20px #f5d878) drop-shadow(0 0 30px #e6c879); transition:transform .25s ease, filter .25s ease; }
 
 .ag-logo-wrap{ position:relative; display:inline-block; }
 .ag-logo{ position:relative; z-index:1; }
-
-/* Golden halo behind logo */
 .ag-logo-wrap::after{
-  content:"";
-  position:absolute; inset:-18% -22%;
-  border-radius:50%;
-  background:radial-gradient(ellipse at 50% 45%,
-              rgba(201,166,91,.35) 0%,
-              rgba(201,166,91,.12) 45%,
-              transparent 62%);
-  opacity:0; transform:scale(.94);
-  transition:opacity .6s ease, transform .8s ease, filter .6s ease;
-  filter:blur(18px);
+  content:""; position:absolute; inset:-18% -22%; border-radius:50%;
+  background:radial-gradient(ellipse at 50% 45%, rgba(201,166,91,.35) 0%, rgba(201,166,91,.12) 45%, transparent 62%);
+  opacity:0; transform:scale(.94); transition:opacity .6s ease, transform .8s ease, filter .6s ease; filter:blur(18px);
 }
-[data-motion="hype"] .ag-logo-wrap::after{ opacity:.9;  transform:scale(1);   animation:haloPulse 4.8s ease-in-out infinite; }
+[data-motion="hype"] .ag-logo-wrap::after{ opacity:.9; transform:scale(1); animation:haloPulse 4.8s ease-in-out infinite; }
 [data-motion="calm"] .ag-logo-wrap::after{ opacity:.4; transform:scale(.96); }
+@keyframes haloPulse{ 0%{opacity:.65;filter:blur(16px)} 50%{opacity:.98;filter:blur(24px)} 100%{opacity:.65;filter:blur(16px)} }
 
-@keyframes haloPulse{
-  0%  { opacity:.65; filter:blur(16px); }
-  50% { opacity:.98; filter:blur(24px); }
-  100%{ opacity:.65; filter:blur(16px); }
-}
-
-/* Optional Agogy crest badge */
 .ag-crest{
   position:absolute; right:-10px; bottom:-10px;
-  width:clamp(20px,2.4vw,36px); height:auto;
-  opacity:.85; filter:drop-shadow(0 0 4px #b6923e);
+  width:clamp(20px,2.4vw,36px); height:auto; opacity:.85; filter:drop-shadow(0 0 4px #b6923e);
   transition:opacity .35s ease, transform .35s ease, filter .35s ease;
 }
 [data-motion="hype"] .ag-crest{ opacity:0; transform:translateY(4px) scale(.92); filter:drop-shadow(0 0 0 transparent); }
-[data-motion="calm"] .ag-crest{ opacity:.9; transform:translateY(0) scale(1); }
+[data-motion="calm"] .ag-crest{ opacity:.9; transform:none; }
 
+/* ---------- Agogy Extras (wow touches) ---------- */
 
-/* =======================================
-   Agogy Gold – Extra Polish & Wow Effects
-   ======================================= */
-
-/* 1) Gold torch swipe under the title (animated underline) */
-.project-name.ag-underline {
-  position: relative;
-  padding-bottom: .25rem;
-}
-.project-name.ag-underline::after {
-  content:"";
-  position:absolute; left:50%; bottom:-6px; transform:translateX(-50%) scaleX(0);
-  width:min(480px, 62vw); height:3px; border-radius:2px;
-  background: linear-gradient(90deg,#0000,#FFD77B 10%,#C9A65B 40%,#FFD77B 80%,#0000);
-  box-shadow: 0 0 16px rgba(201,166,91,.45);
+/* Gold underline swipe (opt-in with .ag-underline on .project-name) */
+.project-name.ag-underline{ position:relative; padding-bottom:.25rem; }
+.project-name.ag-underline::after{
+  content:""; position:absolute; left:50%; bottom:-6px; transform:translateX(-50%) scaleX(0);
+  width:min(480px,62vw); height:3px; border-radius:2px;
+  background:linear-gradient(90deg,#0000,#FFD77B 10%,#C9A65B 40%,#FFD77B 80%,#0000);
+  box-shadow:0 0 16px rgba(201,166,91,.45);
   transition: transform .9s cubic-bezier(.22,1,.36,1), opacity .6s ease;
-  opacity: .0;
+  opacity:0;
 }
-[data-armed="true"] .project-name.ag-underline::after {
-  transform:translateX(-50%) scaleX(1); opacity: 1;
-}
+[data-armed="true"] .project-name.ag-underline::after{ transform:translateX(-50%) scaleX(1); opacity:1; }
 
-/* 2) Scroll-to-top gold FAB */
-.ag-top {
-  position: fixed; right: 18px; bottom: 18px; z-index: 1000;
-  width: 42px; height: 42px; border-radius: 999px;
-  display:flex; align-items:center; justify-content:center;
-  background: linear-gradient(180deg,#FFE39A,#C9A65B);
-  color:#111; font-weight: 800; border:1px solid rgba(0,0,0,.15);
-  box-shadow: 0 8px 22px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.6);
-  cursor: pointer; user-select:none;
-  transform: translateY(12px); opacity: 0; pointer-events: none;
+/* Scroll-to-top FAB (toggle .on with JS if you want) */
+.ag-top{
+  position:fixed; right:18px; bottom:18px; z-index:1000;
+  width:42px; height:42px; border-radius:999px; display:flex; align-items:center; justify-content:center;
+  background: linear-gradient(180deg,#FFE39A,#C9A65B); color:#111; font-weight:800;
+  border:1px solid rgba(0,0,0,.15);
+  box-shadow:0 8px 22px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.6);
+  cursor:pointer; user-select:none; transform:translateY(12px); opacity:0; pointer-events:none;
   transition: opacity .35s ease, transform .35s ease, filter .25s ease;
 }
-.ag-top:hover { filter: brightness(1.06); }
-.ag-top.on  { transform: translateY(0); opacity: 1; pointer-events: auto; }
-
-/* 3) Sparkles overlay for hero (very light weight) */
-.ag-ambient .ag-sparkles {
+.ag-top.on{ transform:none; opacity:1; pointer-events:auto; }
+.ag-ambient .ag-sparkles{
   pointer-events:none; position:absolute; inset:0; z-index:0;
   background:
     radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,.35) 50%, transparent 51%),
     radial-gradient(1.5px 1.5px at 68% 22%, rgba(255,255,255,.28) 50%, transparent 51%),
     radial-gradient(1.5px 1.5px at 40% 70%, rgba(255,255,255,.25) 50%, transparent 51%),
     radial-gradient(2px 2px at 85% 55%, rgba(255,255,255,.32) 50%, transparent 51%);
-  mix-blend-mode: screen;
-  opacity:.0;
-  animation: agSparkle 6s ease-in-out infinite;
+  mix-blend-mode: screen; opacity:.0; animation: agSparkle 6s ease-in-out infinite;
 }
-@keyframes agSparkle { 0%,100%{opacity:.1} 50%{opacity:.35} }
+@keyframes agSparkle{ 0%,100%{opacity:.1} 50%{opacity:.35} }
 
-/* 4) Section divider */
-.ag-divider {
-  --w: min(680px, 72vw);
-  width: var(--w); height: 2px; margin: 28px auto;
-  border-radius: 2px;
-  background: linear-gradient(90deg, #0000, #C9A65B 15%, #FFD77B 50%, #C9A65B 85%, #0000);
-  box-shadow: 0 0 10px rgba(201,166,91,.28);
+.ag-divider{
+  --w:min(680px,72vw);
+  width:var(--w); height:2px; margin:28px auto; border-radius:2px;
+  background:linear-gradient(90deg,#0000,#C9A65B 15%,#FFD77B 50%,#C9A65B 85%,#0000);
+  box-shadow:0 0 10px rgba(201,166,91,.28);
 }
 
-/* 5) Agogy callouts (info/success/warn) */
 .ag-callout{
   padding:14px 16px; border-radius:12px; margin:16px 0;
-  background:#0f0f0f; border:1px solid rgba(255,255,255,.08);
-  position:relative;
+  background:#0f0f0f; border:1px solid rgba(255,255,255,.08); position:relative;
 }
 .ag-callout::before{
   content:""; position:absolute; left:0; top:0; bottom:0; width:6px; border-radius:12px 0 0 12px;
@@ -416,7 +306,6 @@ body{ padding-top:45px; } /* keep content clear of banner */
 .ag-callout.success::before{ background:linear-gradient(#88F7B2,#2ECC71); }
 .ag-callout.warn::before{ background:linear-gradient(#FFD6A3,#FF9E50); }
 
-/* 6) Card lift pattern (opt-in utility) */
 .ag-card{
   background:#141414; border:1px solid rgba(255,255,255,.08); border-radius:16px;
   box-shadow:0 8px 22px rgba(0,0,0,.25);
@@ -424,75 +313,58 @@ body{ padding-top:45px; } /* keep content clear of banner */
 }
 .ag-card:hover{ transform: translateY(-3px); box-shadow:0 14px 32px rgba(0,0,0,.35); border-color: rgba(201,166,91,.35); }
 
-/* 7) Code blocks, with gold header lip */
+/* Code blocks */
 pre, code, kbd, samp{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
 pre{
   background:#0f1012; border:1px solid rgba(255,255,255,.08); color:#dcdcdc;
-  padding: 14px 16px; border-radius: 12px; position: relative; overflow:auto;
+  padding:14px 16px; border-radius:12px; position:relative; overflow:auto;
 }
 pre::before{
   content:""; position:absolute; left:0; right:0; top:0; height:3px; border-radius:12px 12px 0 0;
-  background: linear-gradient(90deg,#C9A65B,#FFD77B,#C9A65B);
-  opacity:.85;
+  background: linear-gradient(90deg,#C9A65B,#FFD77B,#C9A65B); opacity:.85;
 }
 
-/* 8) Fancy links */
+/* Fancy links */
 a{
-  text-decoration: none; border-bottom: 1px dashed rgba(201,166,91,.55);
+  text-decoration:none; border-bottom:1px dashed rgba(201,166,91,.55);
   transition: color .18s ease, border-color .18s ease, text-shadow .18s ease;
 }
-a:hover{
-  color:#fff; border-bottom-color: rgba(255,215,123,.85);
-  text-shadow: 0 0 10px rgba(201,166,91,.45);
-}
+a:hover{ color:#fff; border-bottom-color:rgba(255,215,123,.85); text-shadow:0 0 10px rgba(201,166,91,.45); }
 
-/* 9) Strong but elegant focus ring */
+/* Focus ring */
 :where(a,button,input,select,textarea,[role="button"]):focus{
-  outline: 2px solid rgba(201,166,91,.85);
-  outline-offset: 2px;
-  box-shadow: 0 0 0 4px rgba(201,166,91,.25);
+  outline:2px solid rgba(201,166,91,.85); outline-offset:2px;
+  box-shadow:0 0 0 4px rgba(201,166,91,.25);
 }
 
-/* 10) Print niceties */
+/* Print */
 @media print{
-  .agogy-bar,.ag-nav,.ag-toggle,.ag-top{ display: none !important; }
+  .agogy-bar,.ag-nav,.ag-toggle,.ag-top{ display:none !important; }
   .ag-ambient, .ag-ambient::before, .ag-ambient::after{ animation:none !important; }
 }
 
+/* ---------- Gutter Glow v2 (hero-matched) ---------- */
+@keyframes agGutterFlow { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
 
-/* ================================
-   Gutter Glow – subtle edge color
-   (no layout changes, no breakage)
-   ================================ */
-
-/* Calm: keep your charcoal but add a soft top glow so side gutters aren't flat black */
 [data-motion="calm"] body{
   background:
-    radial-gradient(1200px 600px at 50% -10%, rgba(201,166,91,.06), transparent 60%),
-    #0C0E16; /* your calm body bg */
-}
-
-/* Showtime: very light animated chameleon fade only in the gutters (under content) */
-@keyframes agGutterFlow {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+    radial-gradient(1200px 600px at 50% -10%, rgba(201,166,91,.10), transparent 60%),
+    var(--charcoal);
 }
 
 [data-motion="hype"] body{
-  /* faint version of your hero gradient so it doesn’t fight the sections */
+  --ag-chroma: linear-gradient(
+    120deg,
+    rgba(4,97,159,.24),
+    rgba(6,190,182,.22),
+    rgba(98,54,255,.26),
+    rgba(201,166,91,.24),
+    rgba(4,97,159,.24)
+  );
   background:
-    linear-gradient(
-      120deg,
-      rgba(4,97,159,.10),
-      rgba(6,190,182,.10),
-      rgba(98,54,255,.12),
-      rgba(201,166,91,.10),
-      rgba(4,97,159,.10)
-    );
-  background-size: 500% 500%;
-  animation: agGutterFlow 28s ease-in-out infinite;
+    radial-gradient(1000px 480px at 50% 0, rgba(0,0,0,0) 35%, rgba(0,0,0,.32) 80%),
+    var(--ag-chroma);
+  background-size:500% 500%, 500% 500%;
+  animation: agGutterFlow 18s ease-in-out infinite;
+  background-attachment: fixed;
 }
-
-/* Keep your actual sections exactly as-is */
-
