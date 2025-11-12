@@ -6,6 +6,31 @@
 <!-- 🍯 Load Agogy Styles -->
 <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const hero = document.querySelector('.page-header');
+  if (!hero) return;
+  if (hero.querySelector('.ag-logo-wrap')) return; // avoid duplicates
+
+  const titleEl = hero.querySelector('.project-name') || hero;
+
+  const wrap = document.createElement('span');
+  wrap.className = 'ag-logo-wrap';
+
+  const img = new Image();
+  img.className = 'ag-logo';
+  img.alt = 'IT Chefs Logo';
+  img.decoding = 'async';
+  img.loading  = 'eager';
+  // Known-good path when site source = /docs (cache-bust with ?v=3)
+  img.src = "{{ '/assets/img/itchefs-mark.png?v=3' | relative_url }}";
+
+  wrap.appendChild(img);
+  titleEl.insertAdjacentElement('afterend', wrap);
+});
+</script>
+
+
 <!-- ⚙️ Agogy Injectors (footer, nav, motion, hero logo) -->
 <script>
 document.addEventListener('DOMContentLoaded', function () {
