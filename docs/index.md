@@ -7,8 +7,16 @@ header_classes: ag-ambient
 
 # 👨‍🍳🍳 Welcome to the IT Chefs Kitchen
 
-Where **automation meets artistry**.  
+Where **Automation Meets Art™** 🛠️✨  
 This is the Chef’s counter — a living fusion of ReflexRun AI recipes, automation dishes, and chef-tested briefs, plated fresh by the kitchen crew.
+
+---
+
+## 🛠️✨ Where Automation Meets Art™
+
+Every reflex is a recipe.  
+Every workflow is a dish.  
+Every build is plated with intention and style.
 
 ---
 
