@@ -14,20 +14,18 @@ Here you’ll find living recipes for ReflexRun AI, automation playbooks, and ch
 ---
 
 ## 🧠 Core Dishes
-{% comment %}
-Uncomment these when their pages are ready.
-- 🧾 [Kitchen Briefs](kitchen/briefs/weekly-EXAMPLE.md) — weekly intelligence summaries  
-- ⚙️ [Automation Playbooks](automation/index.md) — scripted workflows  
-- 🧩 [Schemas & Pipelines](schemas/index.md) — data ingredients  
-- 🔬 [Tests & Validation](tests/index.md) — tasting menu for reflex quality  
+- 🧾 [Kitchen Briefs]({{ site.baseurl }}/kitchen/briefs/) — weekly intelligence summaries  
+- ⚙️ [Automation Playbooks]({{ site.baseurl }}/automation/) — scripted workflows  
+- 🧩 [Schemas & Pipelines]({{ site.baseurl }}/schemas/) — data ingredients  
+- 🔬 [Tests & Validation]({{ site.baseurl }}/tests/) — tasting menu for reflex quality   
 {% endcomment %}
 
 ---
 
 ## 🎨 Branding & Design Docs
-- [Brand Matrix 2025](branding/BrandMatrix_2025.md)
-- [Agogy Gold Visual Template Spec](branding/Agogy_Gold_Visual_Template_Spec.md)
-- [IP & Licensing Policy](branding/IP_and_Licensing_Policy.md)
+- [Brand Matrix 2025]({{ site.baseurl }}/branding/BrandMatrix_2025.md)
+- [Agogy Gold Visual Template Spec]({{ site.baseurl }}/branding/Agogy_Gold_Visual_Template_Spec.md)
+- [IP & Licensing Policy]({{ site.baseurl }}/branding/IP_and_Licensing_Policy.md)
 
 ---
 
