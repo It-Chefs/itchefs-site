@@ -1,0 +1,123 @@
+---
+---
+
+@import "jekyll-theme-cayman";
+
+// 🎨 Agogy Gold Chef Palette
+:root {
+  --ag-gold: #C9A65B;
+  --ag-gold-soft: #e1cfa1;
+  --ag-bg-dark: #0f1115;
+  --ag-bg-card: #181b22;
+  --ag-text-main: #f5f5f5;
+  --ag-text-muted: #c0c4cf;
+}
+
+// Overall page background + text
+body {
+  background: radial-gradient(circle at top left, #1f2430 0%, #0b0d11 55%, #050608 100%);
+  color: var(--ag-text-main);
+}
+
+// Main content area
+.page-content {
+  padding-top: 2rem;
+  padding-bottom: 3rem;
+}
+
+// Links
+a {
+  color: var(--ag-gold-soft);
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(201, 166, 91, 0.6);
+}
+
+a:hover {
+  color: var(--ag-gold);
+  border-bottom-style: solid;
+}
+
+// Page header (Cayman uses .page-header)
+.page-header {
+  background: linear-gradient(135deg, #141824, #1e2433 35%, #10131b 100%);
+  border-bottom: 2px solid rgba(201, 166, 91, 0.35);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+}
+
+// When header_classes: ag-ambient (your index.md)
+.page-header.ag-ambient {
+  background: radial-gradient(circle at 10% 0, rgba(201, 166, 91, 0.35) 0, transparent 45%),
+              radial-gradient(circle at 90% 0, rgba(102, 178, 255, 0.25) 0, transparent 50%),
+              linear-gradient(135deg, #101320, #0c0f18 55%, #05060a 100%);
+}
+
+// Title + tagline in header
+.project-name {
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.project-tagline {
+  color: var(--ag-text-muted);
+}
+
+// Main “card” look for sections
+.main-content section,
+.main-content h2 + p,
+.main-content h2 + ul {
+  background: var(--ag-bg-card);
+  padding: 1.25rem 1.5rem;
+  border-radius: 14px;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(201, 166, 91, 0.18);
+}
+
+// Headings
+.main-content h1 {
+  margin-bottom: 1rem;
+}
+
+.main-content h2 {
+  margin-top: 1.75rem;
+  margin-bottom: 0.75rem;
+  color: var(--ag-gold-soft);
+}
+
+// Emojis in headings get a little breathing room
+.main-content h1,
+.main-content h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+}
+
+// Lists inside sections
+.main-content ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.main-content ul li {
+  margin-bottom: 0.6rem;
+}
+
+// Small “pill” look for the little 👉 links
+.main-content ul li a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25em;
+  padding: 0.1rem 0.4rem;
+  border-radius: 999px;
+  background: rgba(5, 8, 15, 0.85);
+}
+
+// Footer meta section
+footer {
+  border-top: 1px solid rgba(201, 166, 91, 0.25);
+  margin-top: 2rem;
+  padding-top: 1rem;
+  font-size: 0.9rem;
+  color: var(--ag-text-muted);
+}
