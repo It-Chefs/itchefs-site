@@ -24,11 +24,11 @@ Every build is plated with intention and style.
 
 - 🧾 **Kitchen Briefs**  
   Your intel snapshots, simmered down into digestible weekly bites.  
-  👉 [Open Kitchen Briefs]({{ site.baseurl }}/kitchen/briefs/)
+  👉 [Open Kitchen Briefs]({{ site.baseurl }}/briefs/)
 
 - 🛠️🍜 **Automation Playbooks**  
   Prepped workflows and scripted techniques — the ramen of automation.  
-  👉 [Open Automation Playbooks]({{ site.baseurl }}/automation/)
+  👉 [Open Automation Playbooks]({{ site.baseurl }}/playbooks/)
 
 - 🧩🥡 **Schemas & Pipelines**  
   Data ingredients boxed and ready — your mise en place for every build.  
@@ -37,6 +37,7 @@ Every build is plated with intention and style.
 - 🔬🍢 **Tests & Validation**  
   Taste-testing menus to ensure every reflex is perfectly seasoned.  
   👉 [Open Tests & Validation]({{ site.baseurl }}/tests/)
+
 
 ---
 
@@ -53,6 +54,7 @@ Every build is plated with intention and style.
 - 🛡️📜 **IP & Licensing Policy**  
   Legal glaze to keep your recipes protected.  
   👉 [View IP & Licensing Policy]({{ site.baseurl }}/branding/IP_and_Licensing_Policy.md)
+
 
 ---
 
