@@ -21,35 +21,38 @@ document.addEventListener('DOMContentLoaded', function () {
       '<a href="https://github.com/It-Chefs/itchefs-site/blob/main/LICENSE">License</a></div>';
   }
 
-  // ===== docs nav =====
+    // ===== docs nav =====
   var header = document.querySelector('.page-header');
   if (header) {
-    // base is already the site.baseurl (e.g. "/itchefs-site")
+    // base is site.baseurl (e.g. "/itchefs-site")
+    // Most GitHub Pages setups with `source: docs` do NOT include "/docs" in the URL,
+    // so we treat base as the URL root.
     var docsBase = base || '';
+
     var links = [
-      { href: docsBase + '/',           label: 'Home' },
-      { href: docsBase + '/briefs/',    label: 'Briefs' },
-      { href: docsBase + '/automation/',label: 'Playbooks' },
-      { href: docsBase + '/branding/',  label: 'Branding' },
-      { href: docsBase + '/tests/',     label: 'Tests' }
+      { href: docsBase + '/',            label: 'Home' },
+      { href: docsBase + '/briefs/',     label: 'Briefs' },
+      { href: docsBase + '/automation/', label: 'Playbooks' },
+      { href: docsBase + '/branding/',   label: 'Branding' },
+      { href: docsBase + '/tests/',      label: 'Tests' }
     ];
 
     var nav = document.createElement('nav');
     nav.className = 'ag-nav';
     nav.setAttribute('aria-label','Primary');
-    nav.innerHTML = links.map(function(i){
-      return '<a href="'+ i.href +'">'+ i.label +'</a>';
+    nav.innerHTML = links.map(function (i) {
+      return '<a href="' + i.href + '">' + i.label + '</a>';
     }).join('');
     header.insertAdjacentElement('beforebegin', nav);
 
     var here = location.pathname;
-    Array.from(nav.querySelectorAll('a')).forEach(function(a){
+    Array.from(nav.querySelectorAll('a')).forEach(function (a) {
       try {
         var ap = new URL(a.href, location.origin).pathname;
         if (here === ap || (ap !== docsBase + '/' && here.startsWith(ap))) {
           a.classList.add('active');
         }
-      } catch(e){}
+      } catch (e) {}
     });
   }
 
