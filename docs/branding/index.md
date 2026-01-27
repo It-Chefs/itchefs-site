@@ -1,5 +1,6 @@
 ---
 title: Branding
+permalink: /branding/
 ---
 
 # Branding & Voice
