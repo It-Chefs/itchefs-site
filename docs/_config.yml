@@ -1,0 +1,12 @@
+title: "IT Chefs Kitchen 👨‍🍳🍳"         
+description: "Where Automation Meets Art™ 🛠️✨"
+url: "https://it-chefs.github.io"
+baseurl: "/itchefs-site"
+theme: jekyll-theme-cayman
+
+markdown: kramdown
+highlighter: rouge
+encoding: "utf-8"
+kramdown:
+  input: GFM
+  hard_wrap: false
